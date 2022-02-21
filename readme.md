@@ -12,7 +12,46 @@ Pet owners would feel comfortable knowing their furry friends are being taken ca
 The website can potentially be visited by pet owners who are looking for pet sitters and by pet hosts - people who are considering adopting a pet and would like to have a glimpse of what pet ownership means (including involving kids in daily routines with the pets).
 
 ## Data / API
-This will be a full-stack application with its own database using PostgreSQL. Front-end will be built using React, and the back-end will be built using Node/Express. 
+This will be a full-stack application with its own database using PostgreSQL. Front-end will be built using React, and the back-end will be built using Node/Express. In order to calculate distance between pet owners and hosts, the application will use the [ZipCode API](https://www.zipcodeapi.com/). The API provides Canadian postal codes and US zip codes within a specified radius (in kilometers or miles) from a given postal/zip code. The free API key is restricted to 10 requests per hour, which should be enough for the purpose of this project.
+
+Here is an example of what a JSON response from the API looks like:
+
+```
+{
+	"postal_codes": [
+        {
+            "postal_code": "T2Y 3X8",
+            "distance": 0,
+            "city": "Calgary",
+            "province": "AB"
+        },
+        {
+            "postal_code": "T2Y 3X7",
+            "distance": 0.056,
+            "city": "Calgary",
+            "province": "AB"
+        },
+        {
+            "postal_code": "T2Y 3T2",
+            "distance": 0.089,
+            "city": "Calgary",
+            "province": "AB"
+        },
+        {
+            "postal_code": "T2Y 3T3",
+            "distance": 0.114,
+            "city": "Calgary",
+            "province": "AB"
+        },
+        {
+            "postal_code": "T2Y 3P2",
+            "distance": 0.119,
+            "city": "Calgary",
+            "province": "AB"
+        }
+    ]
+}
+```
 
 ## Approach
 
