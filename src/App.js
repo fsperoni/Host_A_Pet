@@ -1,10 +1,13 @@
-import logo from './logo.svg';
-import { Header } from './components/Header';
+import { BrowserRouter } from "react-router-dom";
+import HostAPet from './components/HostAPet';
+import '../src/styles/global.scss';
 
 function App() {
   return (
     <div className="App">
-      <Header />
+      <BrowserRouter>
+        <HostAPet />
+      </BrowserRouter>
     </div>
   );
 }
