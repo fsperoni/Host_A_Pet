@@ -14,12 +14,14 @@ nav {
   height: 4.5rem;
   color: var(--white);
   background-color: var(--black);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 
-  div {
-    display: flex;
+  // div {
+  //   display: flex;
+  //   justify-content: flex-start;
+  // }
+
+  .login {
+    margin-left: auto;
   }
   
   h1 {

@@ -10,37 +10,25 @@ const Header = () => {
   return (
     <>
     {/* <header className="headerContainer"> */}
-      <Navbar expand="md">
+      <Navbar expand="md" direction="horizontal">
         <NavLink end to="/" className="navbar-brand">
-          <div>
+          <div className="d-flex">
             <img src={logoImg} alt="Host a Pet"/>
-            <h1>Host a Pet</h1>
+            <h1 className="my-auto">Host a Pet</h1>
           </div>
         </NavLink>
-        <Nav className="ml-auto" navbar>
+        <Nav navbar className="ms-5">
           <NavItem>
             <NavLink className="mr-2" end to="/">Home</NavLink>
           </NavItem>
           <NavItem>
             <NavLink className="mr-2" end to="/loxa">Home</NavLink>
           </NavItem>
-          {/* <NavItem>
-            <NavLink className="mr-2" to="/hosts">Find a Host</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink className="mr-2" to="/pets">Host a Pet</NavLink>
-          </NavItem> */}
         </Nav>
+        <div className="login">
+          <a href="#">Login stuff</a>
+        </div> 
       </Navbar>
-      {/* <div className="headerContent">
-        <a href="/"><img src={logoImg} alt="Host a Pet"/></a>
-        <h1>Host a Pet</h1>
-        <nav className="navBar"></nav>
-      </div>
-      <div className="headerLogin">
-        <p>Login stuff</p>
-      </div> */}
-    {/* </header> */}
   </>
   );
 }
