@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Navbar, Nav, NavItem } from "reactstrap";
-// import UserContext from "./UserContext";
+import UserContext from "./UserContext";
 import logoImg from '../assets/logo.png';
 import '../styles/Header.scss';
 
 const Header = ({ logout }) => {
-  // const { currentUser } = useContext(UserContext);
-  const logged = true;
+  const { currentUser } = useContext(UserContext);
+  // const logged = true;
 
   const signIn = () => {
     return(
@@ -25,8 +25,7 @@ const Header = ({ logout }) => {
   const signOut = () => {
     return (
       <Link to="/" onClick={logout}>
-        Logout
-        {/* Log out {currentUser.first_name || currentUser.username} */}
+        Log out {currentUser.first_name || currentUser.username}
       </Link>
     )
   }
@@ -48,7 +47,7 @@ const Header = ({ logout }) => {
         </NavItem>
       </Nav>
       <div className="login">
-        {logged ? 
+        {currentUser ? 
           signOut() :
           signIn()          
         }

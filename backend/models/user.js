@@ -110,7 +110,7 @@ class User {
       last_name AS "lastName",
       email,
       phone, 
-      posta_code AS "postalCode",
+      postal_code AS "postalCode",
       is_admin AS "isAdmin"
       FROM users
       WHERE username = $1`,

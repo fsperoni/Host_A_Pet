@@ -6,9 +6,7 @@ import '../src/styles/global.scss';
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <HostAPet />
-      </BrowserRouter>
+      <HostAPet />
     </div>
   );
 }
