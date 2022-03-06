@@ -16,3 +16,4 @@ CREATE DATABASE host_pet_test;
 \connect host_pet_test
 
 \i host_pet_schema.sql
+\i host_pet_seed.sql
