@@ -1,13 +1,36 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { Navbar, Nav, NavItem } from "reactstrap";
 // import UserContext from "./UserContext";
 import logoImg from '../assets/logo.png';
 import '../styles/Header.scss';
 
-const Header = () => {
+const Header = ({ logout }) => {
   // const { currentUser } = useContext(UserContext);
-  const logged = false;
+  const logged = true;
+
+  const signIn = () => {
+    return(
+      <>
+      <NavLink end to="/login">
+        Login
+      </NavLink>
+      <NavLink className="ms-3" end to="/signup">
+        Sign Up
+      </NavLink>
+      </>
+    )
+  }
+
+  const signOut = () => {
+    return (
+      <Link to="/" onClick={logout}>
+        Logout
+        {/* Log out {currentUser.first_name || currentUser.username} */}
+      </Link>
+    )
+  }
+
   return (
     <Navbar expand="sm" direction="horizontal">
       <NavLink end to="/" className="navbar-brand">
@@ -26,8 +49,8 @@ const Header = () => {
       </Nav>
       <div className="login">
         {logged ? 
-          <a href="#">Logged</a> :
-          <a href="#">Login stuff</a>
+          signOut() :
+          signIn()          
         }
       </div> 
     </Navbar>
