@@ -9,7 +9,7 @@ const Header = () => {
   // const { currentUser } = useContext(UserContext);
   const logged = false;
   return (
-    <Navbar expand="md" direction="horizontal">
+    <Navbar expand="sm" direction="horizontal">
       <NavLink end to="/" className="navbar-brand">
         <div className="d-flex">
           <img src={logoImg} alt="Host a Pet"/>
