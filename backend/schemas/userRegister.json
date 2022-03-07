@@ -34,9 +34,9 @@
       "minLength": 10,
       "maxLength": 14
     },
-    "postal_code": {
+    "postalCode": {
       "type": "string",
-      "minLength": 7,
+      "minLength": 5,
       "maxLength": 10
     }
   },
@@ -48,6 +48,6 @@
     "password",
     "email",
     "phone",
-    "postal_code"
+    "postalCode"
   ]
 }

@@ -24,9 +24,12 @@ const Header = ({ logout }) => {
 
   const signOut = () => {
     return (
+      <>
+      <span className="me-3">Hello {currentUser.first_name || currentUser.username}!</span>
       <Link to="/" onClick={logout}>
-        Log out {currentUser.first_name || currentUser.username}
+        Log out
       </Link>
+      </>
     )
   }
 

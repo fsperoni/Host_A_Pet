@@ -46,7 +46,7 @@ const LoginForm = ({ login }) => {
 
               {formErrors.length ? <Alert type="danger" messages={formErrors} /> : null}
 
-              <button className="btn btn-primary float-right" onSubmit={handleSubmit}>
+              <button className="btn btn-primary mt-2 float-right" onSubmit={handleSubmit}>
                 Submit
               </button>
             </form>

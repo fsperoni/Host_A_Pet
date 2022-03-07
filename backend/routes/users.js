@@ -17,7 +17,7 @@ const router = express.Router();
 
 /** GET /[username] => { user }
  *
- * Returns { username, firstName, lastName, isAdmin, jobs }
+ * Returns { username, firstName, lastName, email, phone, postalCode, isAdmin }
  *
  * Authorization required: admin or same user-as-:username
  **/
