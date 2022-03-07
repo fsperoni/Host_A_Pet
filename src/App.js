@@ -5,7 +5,7 @@ import '../src/styles/global.scss';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App d-flex flex-column h-100">
       <HostAPet />
     </div>
   );

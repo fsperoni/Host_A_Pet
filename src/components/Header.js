@@ -7,7 +7,6 @@ import '../styles/Header.scss';
 
 const Header = ({ logout }) => {
   const { currentUser } = useContext(UserContext);
-  // const logged = true;
 
   const signIn = () => {
     return(

@@ -89,7 +89,7 @@ const SignupForm = ({ signup }) => {
                 ? <Alert type="danger" messages={formErrors} />
                 : null
               }
-              <button type="submit" className="btn btn-primary float-right"
+              <button type="submit" className="btn btn-primary mt-2 float-right"
                 onSubmit={handleSubmit}>
                 Submit
               </button>

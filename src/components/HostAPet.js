@@ -6,6 +6,7 @@ import AllRoutes from "./AllRoutes";
 import useLocalStorage from "./useLocalStorage";
 import HostAPetApi from "./Api";
 import UserContext from "./UserContext";
+import Footer from "./Footer";
 
 export const TOKEN_ID = "HostAPet-token";
 
@@ -64,10 +65,11 @@ const HostAPet = () => {
     <BrowserRouter>
       <UserContext.Provider
           value={{ currentUser, setCurrentUser }}>
+        <main className="flex-shrink-0">
         <Header logout={logout} />
-        <main>
           <AllRoutes login={login} signup={signup} />
         </main>
+        <Footer />
       </UserContext.Provider>
     </BrowserRouter>
   );

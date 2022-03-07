@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Alert from "./Alert";
 
 /** Login form. */
@@ -49,6 +49,7 @@ const LoginForm = ({ login }) => {
               <button className="btn btn-primary mt-2 float-right" onSubmit={handleSubmit}>
                 Submit
               </button>
+              <p className="mt-2">Don't have an account? <NavLink end to="/signup">Sign Up</NavLink> today!</p>
             </form>
           </div>
         </div>
