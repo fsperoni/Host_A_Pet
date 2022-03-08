@@ -45,14 +45,20 @@ const Header = ({ logout }) => {
           <NavLink className="mr-2" end to="/">Home</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink className="mr-2" end to="/loxa">Home</NavLink>
+          <NavLink className="mr-2" end to="/newBooking">New Booking</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink className="mr-2" end to="/myBookings">My Bookings</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink className="mr-2" end to="/myPets">My Pets</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink end to="/myProfile">My Profile</NavLink>
         </NavItem>
       </Nav>
       <div className="login">
-        {currentUser ? 
-          signOut() :
-          signIn()          
-        }
+        {currentUser ? signOut() : signIn()}
       </div> 
     </Navbar>
   );
