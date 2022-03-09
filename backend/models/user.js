@@ -167,7 +167,8 @@ class User {
         {
           firstName: "first_name",
           lastName: "last_name",
-          isAdmin: "is_admin",
+          postalCode: "postal_code",
+          isAdmin: "is_admin"
         });
     const usernameVarIdx = "$" + (values.length + 1);
 

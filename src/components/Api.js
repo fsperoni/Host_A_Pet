@@ -49,6 +49,17 @@ class HostAPetApi {
     return res.token;
   }
 
+  /** Update user profile. */
+  static async updateUser(username, data) {
+    const res = await this.request(`users/${username}`, data, "patch");
+    return res.user;
+  }
+
+  /** Delete user profile. */
+  static async deleteUser(username, data={}) {
+    const res = await this.request(`users/${username}`, data, "delete");
+    return res;
+  }
 }
 
 export default HostAPetApi;
