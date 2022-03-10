@@ -5,7 +5,7 @@ import HostAPetApi from "./Api";
 import UserContext from "./UserContext";
 
 /** User Profile edit form. */
-const MyProfileForm = () => {
+const MyProfileForm = ({ logout }) => {
   const history = useNavigate();
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [formData, setFormData] = useState({
@@ -48,11 +48,16 @@ const MyProfileForm = () => {
     setCurrentUser(updatedUser);
   }
 
-  /** Handle form data changing */
+  /** Handle form field changes */
   const handleChange = (evt) => {
     const { name, value } = evt.target;
     setFormData(form => ({ ...form, [name]: value }));
     setFormErrors([]);
+  }
+  /** Handle form cancel button */
+  const handleCancel = (evt) => {
+    evt.preventDefault();
+    history("/");
   }
 
   /** Handle form delete button */
@@ -62,7 +67,6 @@ const MyProfileForm = () => {
     let res;
     try {
       res = await HostAPetApi.deleteUser(username);
-      console.log(res);
     } catch (errors) {
       setFormErrors(errors);
       return;
@@ -71,8 +75,7 @@ const MyProfileForm = () => {
     setFormData(f => ({ ...f, password: "" }));
     setFormErrors([]);
     history("/");
-    setCurrentUser(null);
-    
+    logout();
   }
 
   return (
@@ -149,19 +152,26 @@ const MyProfileForm = () => {
               ?
               <Alert type="success" messages={["Updated successfully."]} />
               : null}
-
-            <button
-              className="btn btn-primary btn-block mt-4"
-              onClick={handleSubmit}
-            >
-              Save Changes
-            </button>
-            <button
-              className="btn btn-danger btn-block ms-4 mt-4"
-              onClick={handleDelete}
-            >
-              Delete Account
-            </button>
+            <div className="container mt-4">
+              <button
+                className="btn btn-primary btn-block"
+                onClick={handleSubmit}
+              >
+                Save Changes
+              </button>
+              <button
+                className="btn btn-warning btn-block ms-4"
+                onClick={handleCancel}
+              >
+                Cancel
+              </button>
+              <button
+                className="btn btn-danger btn-block ms-4"
+                onClick={handleDelete}
+              >
+                Delete Account
+              </button>
+            </div>
           </form>
         </div>
       </div>

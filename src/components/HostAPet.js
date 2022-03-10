@@ -67,7 +67,7 @@ const HostAPet = () => {
           value={{ currentUser, setCurrentUser }}>
         <main className="flex-shrink-0">
         <Header logout={logout} />
-          <AllRoutes login={login} signup={signup} />
+          <AllRoutes logout={logout} login={login} signup={signup} />
         </main>
         <Footer />
       </UserContext.Provider>
