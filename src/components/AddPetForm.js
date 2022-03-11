@@ -23,6 +23,11 @@ const AddPetForm = ({pets, setPets}) => {
     try {
       const result = await HostAPetApi.addPet(currentUser.username, formData);
       setPets([...pets, result.pet])
+      setFormData({
+        name: "",
+        type: "",
+        photo: "",
+      })
     } catch (err) {
       setFormErrors(err);
     }
