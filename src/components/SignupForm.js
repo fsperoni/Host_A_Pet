@@ -85,10 +85,7 @@ const SignupForm = ({ signup }) => {
                   value={formData.postalCode}
                 />
               </div>
-              {formErrors.length
-                ? <Alert type="danger" messages={formErrors} />
-                : null
-              }
+              {formErrors.length>0 && <Alert type="danger" messages={formErrors} />}
               <button type="submit" className="btn btn-primary mt-2 float-right"
                 onSubmit={handleSubmit}>
                 Submit

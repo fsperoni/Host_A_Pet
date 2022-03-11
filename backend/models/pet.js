@@ -10,47 +10,6 @@ const { BCRYPT_WORK_FACTOR } = require("../config.js");
 /** Related functions for users. */
 
 class Pet {
-
-  static TYPE = ["Cat", "Dog"];
-  
-  /** Create pet with data.
-   *
-   * Returns { id, ownerId, name, type, photo }
-   *
-   * Throws BadRequestError if pet name already exists for user.
-   **/
-
-  static async register({ ownerId, name, type, photo }) {
-    const duplicateCheck = await db.query(
-          `SELECT name
-           FROM pets
-           WHERE owner_id = $1 AND name = $2`,
-        [ownerId, name],
-    );
-
-    if (duplicateCheck.rows[0]) {
-      throw new BadRequestError(`You already have a pet named ${name}.`);
-    }
-
-    const result = await db.query(
-          `INSERT INTO pets
-           (ownerId,
-            name,
-            type,
-            photo)
-           VALUES ($1, $2, $3, $4)
-           RETURNING id, owner_id AS "ownerId", name, type, photo`,
-        [
-          ownerId,
-          name,
-          type,
-          photo 
-        ]
-    );
-
-    return result.rows[0];
-  }
-
   
   /** Given a pet id, return data about the pet.
    *
@@ -60,7 +19,7 @@ class Pet {
    * Throws NotFoundError if pet not found.
    **/
   
-  static async get(id) {
+  static async getById(id) {
     const petRes = await db.query(
       `SELECT id,
       owner_id AS "ownerId",
@@ -92,6 +51,72 @@ class Pet {
 
     return pet;
   }
+
+  /** Given a username, returns all pets owned.
+   *
+   * Returns list of pets in format { ownerId, name, type, photo }
+   *
+   * Throws NotFoundError if pet not found.
+   **/
+  
+  static async getByUserId(id) {
+    
+    const petRes = await db.query(
+      `SELECT id,
+      owner_id AS "ownerId",
+      name,
+      type,
+      photo 
+      FROM pets
+      WHERE owner_id = $1`,
+      [id]
+    );
+      
+    const pets = petRes.rows;
+    if (!pets) throw new NotFoundError("No pets found!");
+    
+    return pets;
+  }
+
+
+  /** Create pet with data.
+   *
+   * Returns { id, ownerId, name, type, photo }
+   *
+   * Throws BadRequestError if pet name already exists for user.
+   **/
+
+  static async add({ ownerId, name, type, photo }) {
+    const duplicateCheck = await db.query(
+          `SELECT name
+           FROM pets
+           WHERE owner_id = $1 AND name = $2`,
+        [ownerId, name],
+    );
+
+    if (duplicateCheck.rows[0]) {
+      throw new BadRequestError(`You already have a pet named ${name}.`);
+    }
+    const result = await db.query(
+          `INSERT INTO pets
+           (owner_id,
+            name,
+            type,
+            photo)
+           VALUES ($1, $2, $3, $4)
+           RETURNING owner_id AS "ownerId", name, type, photo`,
+        [
+          ownerId,
+          name,
+          type,
+          photo 
+        ]
+    );
+
+    return result.rows[0];
+  }
+
+  
 
 
   /** Delete given pet from database; returns undefined. */

@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
 import HostAPetApi from "./Api";
+import { TYPE } from "./HostAPet";
+import UserContext from "./UserContext";
 
 /** Add Pet form. */
 
-const AddPetForm = ({ addPet }) => {
+const AddPetForm = ({pets, setPets}) => {
+  const { currentUser } = useContext(UserContext);
   const history = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -14,13 +17,14 @@ const AddPetForm = ({ addPet }) => {
   });
   const [formErrors, setFormErrors] = useState([]);
 
+  /** Handle form submit */
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    const result = await signup(formData);
-    if (result.success) {
-      history("/myProfile");
-    } else {
-      setFormErrors(result.errors);
+    try {
+      const result = await HostAPetApi.addPet(currentUser.username, formData);
+      setPets([...pets, result.pet])
+    } catch (err) {
+      setFormErrors(err);
     }
   }
 
@@ -36,29 +40,16 @@ const AddPetForm = ({ addPet }) => {
     history("/");
   }
 
-  /** Handle form delete button */
-  const handleDelete = async (evt) => {
-    evt.preventDefault();
-    const username = formData.username;
-    let res;
-    try {
-      res = await HostAPetApi.deleteUser(username);
-      console.log(res);
-    } catch (errors) {
-      setFormErrors(errors);
-      return;
-    }
-
-    setFormData(f => ({ ...f, password: "" }));
-    setFormErrors([]);
-    history("/");
-    setCurrentUser(null);
+  const generateOptions = () => {
+    return TYPE.map(animal => (
+      <option key={animal} value={animal}>{animal}</option>
+    ))
   }
-  // TODO - ADD DROPDOWN FOR TYPE, LINKING BACK TO GLOBAL VARIABLE PETS.
+  const options = generateOptions();
   return (
-    <div className="AddPetForm">
+    <div className="AddPetForm mt-3">
       <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-        <h2 className="mb-3">Sign Up</h2>
+        <h2 className="mb-3">Add a Pet</h2>
         <div className="card">
           <div className="card-body">
             <form onSubmit={handleSubmit}>
@@ -70,9 +61,10 @@ const AddPetForm = ({ addPet }) => {
               </div>
               <div className="form-group">
                 <label>Type:</label>
-                <input name="type" className="form-control"
-                  value={formData.type} onChange={handleChange}
-                />
+                <select name="type" className="form-select" onChange={handleChange}>
+                  <option hidden="" value="">Select one</option>
+                  {options}
+                </select>
               </div>
               <div className="form-group">
                 <label>Photo:</label>
@@ -80,28 +72,19 @@ const AddPetForm = ({ addPet }) => {
                   value={formData.photo}
                 />
               </div>
-              {formErrors.length
-                ? <Alert type="danger" messages={formErrors} />
-                : null
-              }
+              {formErrors.length>0 && <Alert type="danger" messages={formErrors} />}
               <div className="container mt-4">
               <button
                 className="btn btn-primary btn-block"
                 onClick={handleSubmit}
               >
-                Save Changes
+                Add
               </button>
               <button
                 className="btn btn-warning btn-block ms-4"
                 onClick={handleCancel}
               >
                 Cancel
-              </button>
-              <button
-                className="btn btn-danger btn-block ms-4"
-                onClick={handleDelete}
-              >
-                Delete Account
               </button>
             </div>
             </form>

@@ -124,6 +124,23 @@ class User {
   }
 
 
+  /** Get user id from username. */
+
+  static async getUserId(username) {
+    const result = await db.query(
+      `SELECT id 
+        FROM users
+        WHERE username = $1`,
+      [username]
+    );
+
+    const user = result.rows[0];
+    if (!user) throw new NotFoundError(`User not found: ${username}`);
+    
+    return user.id;
+  }
+
+
   /** Delete given user from database; returns undefined. */
 
   static async remove(username) {
@@ -136,7 +153,7 @@ class User {
     );
     const user = result.rows[0];
 
-    if (!user) throw new NotFoundError(`No user: ${username}`);
+    if (!user) throw new NotFoundError(`User not found: ${username}`);
   }
 
 

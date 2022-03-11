@@ -7,6 +7,7 @@ import Dashboard from "./Dashboard";
 import SignupForm from './SignupForm';
 import MyProfileForm from './MyProfileForm';
 import PrivateRoute from './PrivateRoute';
+import MyPets from './MyPets';
 
 const AllRoutes = ({logout, login, signup}) => {
   return (
@@ -16,6 +17,9 @@ const AllRoutes = ({logout, login, signup}) => {
     <Route exact path="/signup" element={<SignupForm signup = {signup}/>}/>
     <Route exact path="/myProfile" element={<PrivateRoute />}>
       <Route exact path="/myProfile" element={<MyProfileForm logout = {logout}/>}/>
+    </Route>
+    <Route exact path="/myPets" element={<PrivateRoute />}>
+      <Route exact path="/myPets" element={<MyPets />}/>
     </Route>
     <Route exact path="/dashboard" element={<Dashboard />}/>
     <Route path="/*" element={<NotFound />} />

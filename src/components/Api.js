@@ -29,6 +29,7 @@ class HostAPetApi {
     }
   }
 
+  /** User methods ********************   */
 
   /** Get the current user. */
   static async getCurrentUser(username) {
@@ -59,6 +60,38 @@ class HostAPetApi {
     const res = await this.request(`users/${username}`, data, "delete");
     return res;
   }
+
+  /** Pet methods ********************   */
+
+  /** Get a pet. */
+  static async getPet(id) {
+    const res = await this.request(`pets/id/${id}`);
+    return res.pet; // TODO
+  }
+
+  /** Get all pets for user. */
+  static async getPets(username) {
+    const res = await this.request(`pets/user/${username}`);
+    return res.pets;
+  }
+
+  /** Add a pet. */
+  static async addPet(username, data) {
+    const res = await this.request(`pets/add/${username}`, data, "post");
+    return res;
+  }
+
+  /** Update pet profile. */
+  // static async updatePet(username, data) {
+  //   const res = await this.request(`pets/${username}`, data, "patch");
+  //   return res.user;
+  // }
+
+  /** Delete pet profile. */
+  // static async deletePet(username, data={}) {
+  //   const res = await this.request(`users/${username}`, data, "delete");
+  //   return res;
+  // }
 }
 
 export default HostAPetApi;

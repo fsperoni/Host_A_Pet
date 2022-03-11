@@ -9,6 +9,7 @@ import UserContext from "./UserContext";
 import Footer from "./Footer";
 
 export const TOKEN_ID = "HostAPet-token";
+export const TYPE = ["Cat", "Dog"];
 
 /**
  * Main app component that holds all the states, AJAX calls and renders 
