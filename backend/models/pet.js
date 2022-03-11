@@ -104,7 +104,7 @@ class Pet {
             type,
             photo)
            VALUES ($1, $2, $3, $4)
-           RETURNING owner_id AS "ownerId", name, type, photo`,
+           RETURNING id, owner_id AS "ownerId", name, type, photo`,
         [
           ownerId,
           name,
@@ -124,7 +124,7 @@ class Pet {
   static async remove(id) {
     let result = await db.query(
           `DELETE
-           FROM pet
+           FROM pets
            WHERE id = $1
            RETURNING name`,
         [id],

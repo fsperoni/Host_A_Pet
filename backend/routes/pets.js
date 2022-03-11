@@ -33,11 +33,9 @@ router.post("/add/:username", ensureCorrectUserOrAdmin, async function (req, res
       const errs = validator.errors.map(e => e.stack);
       throw new BadRequestError(errs);
     }
-    const pet = await Pet.add(data); // WORK HERE - ERROR MIGHT BE HERE IF THIS RETURNS ERROR.
-    console.log("pet**",pet);
+    const pet = await Pet.add(data); 
     return res.json({ pet });
   } catch (err) {
-    console.log("err**",err);
     return next(err);
   }
 });
@@ -78,6 +76,20 @@ router.get("/user/:username", ensureCorrectUserOrAdmin, async function (req, res
 });
 
 
+/** DELETE /[id/username]  =>  { deleted: id }
+ *
+ * Authorization required: admin or same-user-as-:username
+ **/
+
+router.delete("/:username/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
+  try {
+    await Pet.remove(req.params.id);
+    return res.json({ deleted: req.params.id });
+  } catch (err) {
+    return next(err);
+  }
+});
+
 /** PATCH /[id/username] { pet } => { pet }
  *
  * Data can include:
@@ -104,18 +116,5 @@ router.patch("/:id/:username", ensureCorrectUserOrAdmin, async function (req, re
 });
 
 
-/** DELETE /[id/username]  =>  { deleted: id }
- *
- * Authorization required: admin or same-user-as-:username
- **/
-
-router.delete("/:id/:username", ensureCorrectUserOrAdmin, async function (req, res, next) {
-  try {
-    await Pet.remove(req.params.id);
-    return res.json({ deleted: req.params.id });
-  } catch (err) {
-    return next(err);
-  }
-});
 
 module.exports = router;

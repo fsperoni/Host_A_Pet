@@ -66,7 +66,7 @@ class HostAPetApi {
   /** Get a pet. */
   static async getPet(id) {
     const res = await this.request(`pets/id/${id}`);
-    return res.pet; // TODO
+    return res.pet; 
   }
 
   /** Get all pets for user. */
@@ -81,17 +81,18 @@ class HostAPetApi {
     return res;
   }
 
+  /** Delete pet profile. */
+  static async deletePet(username, id, data={}) {
+    const res = await this.request(`pets/${username}/${id}`, data, "delete");
+    return res;
+  }
+
   /** Update pet profile. */
   // static async updatePet(username, data) {
   //   const res = await this.request(`pets/${username}`, data, "patch");
   //   return res.user;
   // }
 
-  /** Delete pet profile. */
-  // static async deletePet(username, data={}) {
-  //   const res = await this.request(`users/${username}`, data, "delete");
-  //   return res;
-  // }
 }
 
 export default HostAPetApi;
