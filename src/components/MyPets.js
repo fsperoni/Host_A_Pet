@@ -21,7 +21,7 @@ const MyPets = () => {
 
   const handleDeletePet = async(evt) => {
     const id = parseInt(evt.target.children[0].value);
-    const res = await HostAPetApi.deletePet(currentUser.username, id);
+    await HostAPetApi.deletePet(currentUser.username, id);
     setPets(pets => pets.filter(pet => pet.id !== id));
   }
 
@@ -29,7 +29,7 @@ const MyPets = () => {
     <div key={pet.id} className="card mt-3">
       <div className="card-body">
         <h3>{pet.name} the {pet.type}</h3>
-        <img src={pet.photo} className="mt-2 img-fluid"/>
+        <img src={pet.photo} className="mt-2 img-fluid" alt="pet"/>
         <div className="container mt-3">
           <button className="btn btn-sm btn-primary" onClick={handleEditPet}>
             <data value={pet.id} />
@@ -47,7 +47,7 @@ const MyPets = () => {
     <div className="MyPets">
       <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
         <h2 className="mb-3">My Pets</h2>
-        {petCards}
+        {pets.length ? petCards : <h3 className="ms-2">No pets added yet</h3>}
       </div>
       <AddPetForm pets={pets} setPets={setPets}/>
     </div>

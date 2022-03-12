@@ -10,15 +10,12 @@ import Footer from "./Footer";
 
 export const TOKEN_ID = "HostAPet-token";
 export const TYPE = ["Cat", "Dog"];
-export const DOG_PHOTO = "../assets/dog.jpeg";
-export const CAT_PHOTO = "../assets/cat.png"
 
 /**
  * Main app component that holds all the states, AJAX calls and renders 
  * the different routes as applicable.
  */
 const HostAPet = () => {
-  const [infoLoaded, setInfoLoaded] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useLocalStorage(TOKEN_ID);
 
@@ -35,9 +32,7 @@ const HostAPet = () => {
           setCurrentUser(null);
         }
       }
-      setInfoLoaded(true);
     }
-    setInfoLoaded(false);
     getCurrentUser();
   }, [token]);
 
