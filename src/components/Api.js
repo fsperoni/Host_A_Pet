@@ -1,4 +1,6 @@
 import axios from "axios";
+import dog from "../assets/dog.jpeg";
+import cat from "../assets/cat.png";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
@@ -77,6 +79,8 @@ class HostAPetApi {
 
   /** Add a pet. */
   static async addPet(username, data) {
+    if (data.photo.length < 3 && data.type == 'Cat') data.photo = cat;
+    if (data.photo.length < 3 && data.type == 'Dog') data.photo = dog;
     const res = await this.request(`pets/add/${username}`, data, "post");
     return res;
   }

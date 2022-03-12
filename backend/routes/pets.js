@@ -18,6 +18,7 @@ const router = express.Router();
 
 /** POST /[id] => { pet }
  *
+ * If a photo url is not provided, add a default one.
  * Returns { ownerId, name, type, photo }
  *
  * Authorization required: logged in user

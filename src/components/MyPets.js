@@ -26,11 +26,11 @@ const MyPets = () => {
   }
 
   const petCards = pets.map(pet => (
-    <div key={pet.id} className="card">
+    <div key={pet.id} className="card mt-3">
       <div className="card-body">
-        <p>{pet.name} the {pet.type}</p>
-        <p>{pet.photo}</p>
-        <div className="container mt-2">
+        <h3>{pet.name} the {pet.type}</h3>
+        <img src={pet.photo} className="mt-2 img-fluid"/>
+        <div className="container mt-3">
           <button className="btn btn-sm btn-primary" onClick={handleEditPet}>
             <data value={pet.id} />
             Edit

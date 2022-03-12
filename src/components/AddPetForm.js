@@ -25,9 +25,10 @@ const AddPetForm = ({pets, setPets}) => {
       setPets([...pets, result.pet])
       setFormData({
         name: "",
-        type: "",
+        type: "Select one",
         photo: "",
       })
+      setFormErrors([]);
     } catch (err) {
       setFormErrors(err);
     }
@@ -37,6 +38,7 @@ const AddPetForm = ({pets, setPets}) => {
   const handleChange = (evt) => {
     const { name, value } = evt.target;
     setFormData(data => ({ ...data, [name]: value }));
+    setFormErrors([]);
   }
 
   /** Handle form cancel button */
