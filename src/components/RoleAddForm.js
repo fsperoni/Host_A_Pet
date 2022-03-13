@@ -51,7 +51,7 @@ const RoleAddForm = ({roles, setRoles}) => {
               <div className="form-group">
                 <label>Name:</label>
                 <input name="name" className="form-control" onChange={handleChange}
-                  value={formData.name}
+                  value={formData.name} required
                 />
               </div>
               {formErrors.length>0 && <Alert type="danger" messages={formErrors} />}

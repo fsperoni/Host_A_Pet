@@ -152,8 +152,10 @@ class Pet {
     const duplicateCheck = await db.query(
       `SELECT name
        FROM pets
-       WHERE owner_id = $1 AND name = $2`,
-    [data.ownerId, data.name],
+       WHERE owner_id = $1 
+        AND name = $2
+        AND id != $3`,
+    [data.ownerId, data.name, id],
     );
 
     if (duplicateCheck.rows[0]) {
