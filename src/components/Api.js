@@ -99,6 +99,38 @@ class HostAPetApi {
     return res;
   }
 
+  /** Role methods ********************   */
+
+  /** Get a role. */
+  static async getRole(id) {
+    const res = await this.request(`roles/${id}`);
+    return res.role; 
+  }
+
+  /** Get all roles. */
+  static async getAllRoles() {
+    const res = await this.request(`roles`);
+    return res.roles;
+  }
+
+  /** Add a role. */
+  static async addRole(data) {
+    const res = await this.request(`roles`, data, "post");
+    return res;
+  }
+
+  /** Delete role. */
+  static async deleteRole(id, data={}) {
+    const res = await this.request(`roles/${id}`, data, "delete");
+    return res;
+  }
+
+  /** Update role. */
+  static async updateRole(id, data) {
+    const res = await this.request(`roles/${id}`, data, "patch");
+    return res;
+  }
+
 }
 
 export default HostAPetApi;

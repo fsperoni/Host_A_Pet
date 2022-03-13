@@ -1,13 +1,11 @@
 "use strict";
 
 const db = require("../db");
-const bcrypt = require("bcrypt");
 const { sqlForPartialUpdate } = require("../helpers/sql");
-const { NotFoundError, BadRequestError, UnauthorizedError,} = require("../expressError");
+const { NotFoundError, BadRequestError } = require("../expressError");
 
-const { BCRYPT_WORK_FACTOR } = require("../config.js");
 
-/** Related functions for users. */
+/** Related functions for pets. */
 
 class Pet {
   
@@ -122,7 +120,7 @@ class Pet {
   /** Delete given pet from database; returns undefined. */
 
   static async remove(id) {
-    let result = await db.query(
+    const result = await db.query(
           `DELETE
            FROM pets
            WHERE id = $1
@@ -150,7 +148,6 @@ class Pet {
    */
 
   static async update(id, data) {
-    console.log(data);
 
     const duplicateCheck = await db.query(
       `SELECT name
@@ -158,8 +155,6 @@ class Pet {
        WHERE owner_id = $1 AND name = $2`,
     [data.ownerId, data.name],
     );
-
-    console.log(duplicateCheck.rows);
 
     if (duplicateCheck.rows[0]) {
       throw new BadRequestError(`You already have a pet named ${data.name}.`);

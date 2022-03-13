@@ -56,6 +56,11 @@ const Header = ({ logout }) => {
         <NavItem>
           <NavLink end to="/myProfile">My Profile</NavLink>
         </NavItem>
+        {currentUser && currentUser.isAdmin &&
+          <NavItem>
+            <NavLink end to="/admin">Admin</NavLink>
+          </NavItem>
+        }
       </Nav>
       <div className="login">
         {currentUser ? signOut() : signIn()}

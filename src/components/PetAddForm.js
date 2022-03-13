@@ -7,7 +7,7 @@ import UserContext from "../hooks/useUserContext";
 
 /** Add Pet form. */
 
-const AddPetForm = ({pets, setPets}) => {
+const PetAddForm = ({pets, setPets}) => {
   const { currentUser } = useContext(UserContext);
   const history = useNavigate();
   const [formData, setFormData] = useState({
@@ -102,4 +102,4 @@ const AddPetForm = ({pets, setPets}) => {
   );
 }
 
-export default AddPetForm;
+export default PetAddForm;

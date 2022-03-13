@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import UserContext from "../hooks/useUserContext";
 import HostAPetApi from "./Api";
-import EditPetForm from "./EditPetForm";
+import PetEditForm from "./PetEditForm";
 
 const MyPet = ({ pet, pets, setPets }) => {
   const [showEditForm, setShowEditForm] = useState(false);
@@ -31,7 +31,7 @@ const MyPet = ({ pet, pets, setPets }) => {
             Delete
           </button>
           {showEditForm ? 
-            <EditPetForm pet={pet} pets={pets} setPets={setPets} setShowEditForm={setShowEditForm}/> : 
+            <PetEditForm pet={pet} pets={pets} setPets={setPets} setShowEditForm={setShowEditForm}/> : 
           null}
         </div>
       </div>

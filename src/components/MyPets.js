@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import UserContext from "../hooks/useUserContext";
-import AddPetForm from './AddPetForm';
+import PetAddForm from './PetAddForm';
 import HostAPetApi from './Api';
 import MyPet from './MyPet';
 
@@ -26,7 +26,7 @@ const MyPets = () => {
         <h2 className="mb-3">My Pets</h2>
         {pets.length ? petCards : <h3 className="ms-2">No pets added yet</h3>}
       </div>
-      <AddPetForm pets={pets} setPets={setPets}/>
+      <PetAddForm pets={pets} setPets={setPets}/>
     </div>
   )
 }

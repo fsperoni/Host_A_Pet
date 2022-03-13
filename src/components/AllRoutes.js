@@ -8,6 +8,8 @@ import SignupForm from './SignupForm';
 import MyProfileForm from './MyProfileForm';
 import PrivateRoute from './PrivateRoute';
 import MyPets from './MyPets';
+import AdminPanel from './AdminPanel';
+import AdminRoute from './AdminRoute';
 
 const AllRoutes = ({logout, login, signup}) => {
   return (
@@ -20,6 +22,9 @@ const AllRoutes = ({logout, login, signup}) => {
     </Route>
     <Route exact path="/myPets" element={<PrivateRoute />}>
       <Route exact path="/myPets" element={<MyPets />}/>
+    </Route>
+    <Route exact path="/admin" element={<AdminRoute />}>
+      <Route exact path="/admin" element={<AdminPanel />}/>
     </Route>
     <Route exact path="/dashboard" element={<Dashboard />}/>
     <Route path="/*" element={<NotFound />} />
