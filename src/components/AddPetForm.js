@@ -54,7 +54,7 @@ const AddPetForm = ({pets, setPets}) => {
   }
   const options = generateOptions();
   return (
-    <div className="AddPetForm mt-3">
+    <div className="AddPetForm mt-3 mb-3">
       <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
         <h2 className="mb-3">Add a Pet</h2>
         <div className="card">

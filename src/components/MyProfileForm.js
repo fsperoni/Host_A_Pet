@@ -64,9 +64,8 @@ const MyProfileForm = ({ logout }) => {
   const handleDelete = async (evt) => {
     evt.preventDefault();
     const username = formData.username;
-    let res;
     try {
-      res = await HostAPetApi.deleteUser(username);
+      await HostAPetApi.deleteUser(username);
     } catch (errors) {
       setFormErrors(errors);
       return;
@@ -79,15 +78,11 @@ const MyProfileForm = ({ logout }) => {
   }
 
   return (
-    <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
+    <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4 mb-3">
       <h3>Profile</h3>
       <div className="card">
         <div className="card-body">
           <form>
-            <div className="form-group">
-              <label>Username:</label>
-              <p className="form-control-plaintext">{formData.username}</p>
-            </div>
             <div className="form-group">
               <label>First Name:</label>
               <input
