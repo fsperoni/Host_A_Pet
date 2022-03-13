@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import UserContext from "./UserContext";
+import UserContext from "../hooks/useUserContext";
 import AddPetForm from './AddPetForm';
 import HostAPetApi from './Api';
+import MyPet from './MyPet';
 
 const MyPets = () => {
   const { currentUser } = useContext(UserContext);
@@ -15,34 +16,10 @@ const MyPets = () => {
     getUserPets();
   }, [currentUser.username]);
 
-  const handleEditPet = async () => {
-
-  }
-
-  const handleDeletePet = async(evt) => {
-    const id = parseInt(evt.target.children[0].value);
-    await HostAPetApi.deletePet(currentUser.username, id);
-    setPets(pets => pets.filter(pet => pet.id !== id));
-  }
-
   const petCards = pets.map(pet => (
-    <div key={pet.id} className="card mt-3">
-      <div className="card-body">
-        <h3>{pet.name} the {pet.type}</h3>
-        <img src={pet.photo} className="mt-2 img-fluid" alt="pet"/>
-        <div className="container mt-3">
-          <button className="btn btn-sm btn-primary" onClick={handleEditPet}>
-            <data value={pet.id} />
-            Edit
-          </button>
-          <button className="btn btn-sm btn-danger ms-2" onClick={handleDeletePet}>
-            <data value={pet.id} />
-            Delete
-          </button>
-        </div>
-      </div>
-    </div>
-  ))
+    <MyPet key={pet.id} pet={pet} pets={pets} setPets={setPets}/>
+  ));
+
   return (
     <div className="MyPets">
       <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">

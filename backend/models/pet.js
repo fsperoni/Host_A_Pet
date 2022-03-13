@@ -150,6 +150,20 @@ class Pet {
    */
 
   static async update(id, data) {
+    console.log(data);
+
+    const duplicateCheck = await db.query(
+      `SELECT name
+       FROM pets
+       WHERE owner_id = $1 AND name = $2`,
+    [data.ownerId, data.name],
+    );
+
+    console.log(duplicateCheck.rows);
+
+    if (duplicateCheck.rows[0]) {
+      throw new BadRequestError(`You already have a pet named ${data.name}.`);
+    }
 
     const { setCols, values } = sqlForPartialUpdate(
         data,

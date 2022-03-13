@@ -101,14 +101,13 @@ router.delete("/:username/:id", ensureCorrectUserOrAdmin, async function (req, r
  * Authorization required: admin or same-user-as-:username
  **/
 
-router.patch("/:id/:username", ensureCorrectUserOrAdmin, async function (req, res, next) {
+router.patch("/:username/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
   try {
     const validator = jsonschema.validate(req.body, petUpdateSchema);
     if (!validator.valid) {
       const errs = validator.errors.map(e => e.stack);
       throw new BadRequestError(errs);
     }
-
     const pet = await Pet.update(req.params.id, req.body);
     return res.json({ pet });
   } catch (err) {

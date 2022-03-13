@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
 import HostAPetApi from "./Api";
-import UserContext from "./UserContext";
+import UserContext from "../hooks/useUserContext";
 
 /** User Profile edit form. */
 const MyProfileForm = ({ logout }) => {

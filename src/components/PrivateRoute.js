@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import LoginForm from "./LoginForm";
-import UserContext from "./UserContext";
+import UserContext from "../hooks/useUserContext";
 
 /** Ensuring access to logged in users only. */
 const PrivateRoute = ({ exact, path, children }) => {

@@ -79,8 +79,8 @@ class HostAPetApi {
 
   /** Add a pet. */
   static async addPet(username, data) {
-    if (data.photo.length < 3 && data.type == 'Cat') data.photo = cat;
-    if (data.photo.length < 3 && data.type == 'Dog') data.photo = dog;
+    if (data.photo.length < 3 && data.type === 'Cat') data.photo = cat;
+    if (data.photo.length < 3 && data.type === 'Dog') data.photo = dog;
     const res = await this.request(`pets/add/${username}`, data, "post");
     return res;
   }
@@ -92,10 +92,12 @@ class HostAPetApi {
   }
 
   /** Update pet profile. */
-  // static async updatePet(username, data) {
-  //   const res = await this.request(`pets/${username}`, data, "patch");
-  //   return res.user;
-  // }
+  static async updatePet(username, id, data) {
+    if (data.photo.length < 3 && data.type === 'Cat') data.photo = cat;
+    if (data.photo.length < 3 && data.type === 'Dog') data.photo = dog;
+    const res = await this.request(`pets/${username}/${id}`, data, "patch");
+    return res;
+  }
 
 }
 

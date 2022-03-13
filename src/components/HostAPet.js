@@ -3,9 +3,9 @@ import { BrowserRouter } from "react-router-dom";
 import jwt from "jsonwebtoken";
 import Header from "./Header";
 import AllRoutes from "./AllRoutes";
-import useLocalStorage from "./useLocalStorage";
+import useLocalStorage from "../hooks/useLocalStorage";
 import HostAPetApi from "./Api";
-import UserContext from "./UserContext";
+import UserContext from "../hooks/useUserContext";
 import Footer from "./Footer";
 
 export const TOKEN_ID = "HostAPet-token";

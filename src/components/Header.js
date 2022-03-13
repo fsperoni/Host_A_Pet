@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Navbar, Nav, NavItem } from "reactstrap";
-import UserContext from "./UserContext";
+import UserContext from "../hooks/useUserContext";
 import logoImg from '../assets/logo.png';
 import '../styles/Header.scss';
 

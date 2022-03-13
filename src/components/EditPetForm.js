@@ -1,34 +1,33 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
 import HostAPetApi from "./Api";
 import { TYPE } from "./HostAPet";
 import UserContext from "../hooks/useUserContext";
 
-/** Add Pet form. */
+/** Edit Pet form. */
 
-const AddPetForm = ({pets, setPets}) => {
+const EditPetForm = ({pet, pets, setPets, setShowEditForm}) => {
   const { currentUser } = useContext(UserContext);
-  const history = useNavigate();
   const [formData, setFormData] = useState({
-    name: "",
-    type: "",
-    photo: "",
+    ownerId: pet.ownerId,
+    name: pet.name,
+    type: pet.type,
+    photo: pet.photo,
   });
   const [formErrors, setFormErrors] = useState([]);
 
   /** Handle form submit */
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+    const id = parseInt(evt.target.children[0].value);
     try {
-      const result = await HostAPetApi.addPet(currentUser.username, formData);
-      setPets([...pets, result.pet])
-      setFormData({
-        name: "",
-        type: "Select one",
-        photo: "",
-      })
+      const result = await HostAPetApi.updatePet(currentUser.username, id, formData)
+      const newPets = pets.filter(pet => pet.id !== id);
+      setPets([...newPets, result.pet])
+      console.log("newPets",newPets);
+      console.log("pets",pets);
       setFormErrors([]);
+      setShowEditForm(false);
     } catch (err) {
       setFormErrors(err);
     }
@@ -44,19 +43,20 @@ const AddPetForm = ({pets, setPets}) => {
   /** Handle form cancel button */
   const handleCancel = (evt) => {
     evt.preventDefault();
-    history("/");
+    setFormErrors([]);
+    setShowEditForm(false);
   }
 
   const generateOptions = () => {
-    return TYPE.map(animal => (
+    return TYPE.filter(t => t !== formData.type).map(animal => (
       <option key={animal} value={animal}>{animal}</option>
     ))
   }
   const options = generateOptions();
   return (
-    <div className="AddPetForm mt-3">
-      <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-        <h2 className="mb-3">Add a Pet</h2>
+    <div className="EditPetForm mt-3">
+      <div className="container">
+        <h2 className="mb-3">Update pet info</h2>
         <div className="card">
           <div className="card-body">
             <form onSubmit={handleSubmit}>
@@ -69,7 +69,7 @@ const AddPetForm = ({pets, setPets}) => {
               <div className="form-group">
                 <label>Type:</label>
                 <select name="type" className="form-select" onChange={handleChange}>
-                  <option hidden="" value="">Select one</option>
+                  <option value={formData.type}>{formData.type}</option>
                   {options}
                 </select>
               </div>
@@ -81,11 +81,11 @@ const AddPetForm = ({pets, setPets}) => {
               </div>
               {formErrors.length>0 && <Alert type="danger" messages={formErrors} />}
               <div className="container mt-4">
-              <button
+              <button 
                 className="btn btn-primary btn-block"
                 onClick={handleSubmit}
-              >
-                Add
+              > <data value={pet.id} />
+                Save
               </button>
               <button
                 className="btn btn-warning btn-block ms-4"
@@ -102,4 +102,4 @@ const AddPetForm = ({pets, setPets}) => {
   );
 }
 
-export default AddPetForm;
+export default EditPetForm;
