@@ -23,7 +23,7 @@ const AvailabilityEditForm = ({avail, avails, setAvails, setShowEditForm, roles}
     try {
       const result = await HostAPetApi.updateAvailability(currentUser.username, id, formData)
       const newAvails = avails.filter(avail => avail.id !== id);
-      setAvails([...newAvails, result.availability])
+      setAvails([...newAvails, result])
       setFormErrors([]);
       setShowEditForm(false);
     } catch (err) {
@@ -51,7 +51,7 @@ const AvailabilityEditForm = ({avail, avails, setAvails, setShowEditForm, roles}
     ))
   }
   const options = generateOptions();
-  const defaultOption = roles.filter(r => r.id === formData.roleId);
+  const role = roles.find(role => role.id === avail.roleId);
   return (
     <div className="AvailabilityEditForm mt-3">
       <div className="container">
@@ -73,8 +73,8 @@ const AvailabilityEditForm = ({avail, avails, setAvails, setShowEditForm, roles}
               </div>
               <div className="form-group">
                 <label>Role:</label>
-                <select name="role" className="form-select" onChange={handleChange}>
-                  <option value={defaultOption.id}>{defaultOption.name}</option>
+                <select name="roleId" className="form-select" onChange={handleChange}>
+                  <option value={role.id}>{role.name}</option>
                   {options}
                 </select>
               </div>

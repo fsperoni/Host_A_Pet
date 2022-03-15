@@ -151,14 +151,22 @@ class Availability {
    * another availability for the same user.
    */
 
-  static async update(id, { startDate, endDate, userId, roleId }) {
+  static async update(id, data) {
 
+    if (data.startDate > data.endDate) throw new BadRequestError("End date must be greater than start date!");
     const duplicateCheck = await db.query(
-      `SELECT id
+      `SELECT id, start_date, end_date
              FROM availabilities
              WHERE user_id = $1 AND role_id = $2
-              AND (start_date <= $3 OR end_date >= $4)`,
-      [userId, roleId, startDate, endDate],
+              AND (
+                ($3 >= start_date AND $3 <= end_date)
+                OR 
+                ($4 >= start_date AND $4 <= end_date)
+                OR
+                ($3 <= start_date AND $4 >= end_date)
+              )
+              `,
+      [data.userId, data.roleId, data.startDate, data.endDate],
     );
 
     if (duplicateCheck.rows[0]) {
@@ -179,9 +187,10 @@ class Availability {
                     SET ${setCols} 
                     WHERE id = ${availVarIdx} 
                     RETURNING id,
-                              name,
-                              type,
-                              photo`;
+                              start_date AS "startDate",
+                              end_date AS "endDate",
+                              user_id AS "userId",
+                              role_id AS "roleId"`;
     const result = await db.query(querySql, [...values, id]);
     const availability = result.rows[0];
 

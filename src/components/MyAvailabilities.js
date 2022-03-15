@@ -28,8 +28,8 @@ const MyAvailabilities = () => {
   }, [currentUser.username]);
 
 
-  const availRows = avails.map(avail => (
-    <MyAvailability key={avail.id} avail={avail} avails={avails} 
+  const availRows = avails.map(a => (
+    <MyAvailability key={a.id} avail={a} avails={avails} 
       setAvails={setAvails} roles={roles}/>
   ));
 
@@ -44,7 +44,7 @@ const MyAvailabilities = () => {
         </tr>
       </thead>
       <tbody>
-        {availRows}
+        {avails.length ? availRows : null}
       </tbody>
     </table>
   );

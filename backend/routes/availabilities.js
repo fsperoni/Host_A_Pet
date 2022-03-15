@@ -26,14 +26,14 @@ const router = express.Router();
 router.post("/:username", ensureCorrectUserOrAdmin, async function (req, res, next) {
   const username = req.params.username;
   const userId = await User.getUserId(username);
-  const data = {...req.body, userId}
+  const data = { ...req.body, userId }
   try {
     const validator = jsonschema.validate(data, availAddSchema);
     if (!validator.valid) {
       const errs = validator.errors.map(e => e.stack);
       throw new BadRequestError(errs);
     }
-    const availability = await Availability.add(data); 
+    const availability = await Availability.add(data);
     return res.json({ availability });
   } catch (err) {
     return next(err);
@@ -51,7 +51,7 @@ router.post("/:username", ensureCorrectUserOrAdmin, async function (req, res, ne
 router.get("/:username", ensureCorrectUserOrAdmin, async function (req, res, next) {
   const username = req.params.username;
   try {
-    const availabilities = await Availability.getUserAll(username); 
+    const availabilities = await Availability.getUserAll(username);
     return res.json({ availabilities });
   } catch (err) {
     return next(err);
@@ -119,12 +119,15 @@ router.delete("/:username/:id", ensureCorrectUserOrAdmin, async function (req, r
 
 router.patch("/:username/:id", ensureCorrectUserOrAdmin, async function (req, res, next) {
   try {
-    const validator = jsonschema.validate(req.body, availUpdateSchema);
+    const username = req.params.username;
+    const userId = await User.getUserId(username);
+    const data = { ...req.body, userId }
+    const validator = jsonschema.validate(data, availUpdateSchema);
     if (!validator.valid) {
       const errs = validator.errors.map(e => e.stack);
       throw new BadRequestError(errs);
     }
-    const availability = await Availability.update(req.params.id, req.body);
+    const availability = await Availability.update(req.params.id, data);
     return res.json({ availability });
   } catch (err) {
     return next(err);

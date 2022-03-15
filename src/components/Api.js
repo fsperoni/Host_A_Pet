@@ -166,6 +166,7 @@ class HostAPetApi {
 
   /** Update availability. */
   static async updateAvailability(username, id, data) {
+    data = {...data, roleId: Number(data.roleId)};
     const res = await this.request(`availabilities/${username}/${id}`, data, "patch");
     return res.availability;
   }
