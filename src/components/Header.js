@@ -24,7 +24,7 @@ const Header = ({ logout }) => {
   const signOut = () => {
     return (
       <>
-      <span className="me-3">Hello {currentUser.first_name || currentUser.username}!</span>
+      <span className="me-3">Hello {currentUser.firstName || currentUser.username}!</span>
       <Link to="/" onClick={logout}>
         Log out
       </Link>
@@ -49,6 +49,9 @@ const Header = ({ logout }) => {
         </NavItem>
         <NavItem>
           <NavLink className="mr-2" end to="/myBookings">My Bookings</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink className="mr-2" end to="/myAvailabilities">My Availabilities</NavLink>
         </NavItem>
         <NavItem>
           <NavLink className="mr-2" end to="/myPets">My Pets</NavLink>

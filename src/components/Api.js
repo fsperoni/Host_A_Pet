@@ -131,6 +131,44 @@ class HostAPetApi {
     return res;
   }
 
+  /** Availability methods ********************   */
+
+  /** Get an availability. */
+  static async getAvailability(id) {
+    const res = await this.request(`availabilities/id/${id}`);
+    return res.pet; 
+  }
+
+  /** Get all availabilities for date range. */
+  static async getAllAvailabilities(data) {
+    const res = await this.request("availabilities/dates", data);
+    return res.availabilities;
+  }
+
+  /** Add an availability. */
+  static async addAvailability(username, data) {
+    data = {...data, roleId: Number(data.roleId)};
+    const res = await this.request(`availabilities/${username}`, data, "post");
+    return res.availability;
+  }
+
+  /** Get availabilities for a specific user. */
+  static async getUserAvailabilities(username) {
+    const res = await this.request(`availabilities/${username}`);
+    return res.availabilities;
+  }
+
+  /** Delete an availability. */
+  static async deleteAvailability(username, id, data={}) {
+    const res = await this.request(`availabilities/${username}/${id}`, data, "delete");
+    return res;
+  }
+
+  /** Update availability. */
+  static async updateAvailability(username, id, data) {
+    const res = await this.request(`availabilities/${username}/${id}`, data, "patch");
+    return res.availability;
+  }
 }
 
 export default HostAPetApi;

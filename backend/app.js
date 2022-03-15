@@ -13,6 +13,7 @@ const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/users");
 const petRoutes = require("./routes/pets");
 const roleRoutes = require("./routes/roles");
+const availRoutes = require("./routes/availabilities");
 
 const morgan = require("morgan");
 
@@ -28,6 +29,7 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/pets", petRoutes);
 app.use("/roles", roleRoutes);
+app.use("/availabilities", availRoutes);
 
 
 // Handle 404 errors
