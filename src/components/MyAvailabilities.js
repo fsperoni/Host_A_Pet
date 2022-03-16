@@ -34,7 +34,7 @@ const MyAvailabilities = () => {
   ));
 
   const availTable = (
-    <table className="table table-striped table-hover">
+    <table className="table table-striped table-hover table-responsive text-center">
       <thead>
         <tr>
           <th>Role</th>

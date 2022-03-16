@@ -25,7 +25,7 @@ const MyAvailability = ({ avail, avails, setAvails, roles }) => {
       <td>{avail.startDate.substring(0,10)}</td>
       <td>{avail.endDate.substring(0,10)}</td>
       <td>
-        <div className="container mt-3">
+        <div className="container">
           <button className="btn btn-sm btn-primary" onClick={handleEditAvail}>
             Edit
           </button>
