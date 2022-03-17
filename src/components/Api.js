@@ -136,12 +136,12 @@ class HostAPetApi {
   /** Get an availability. */
   static async getAvailability(id) {
     const res = await this.request(`availabilities/id/${id}`);
-    return res.pet; 
+    return res.availability; 
   }
 
-  /** Get all availabilities for date range. */
-  static async getAllAvailabilities(data) {
-    const res = await this.request("availabilities/dates", data);
+  /** Get all availabilities for search data. */
+  static async getAllAvailabilities(username, data) {
+    const res = await this.request(`availabilities/search/${username}`, data, "post");
     return res.availabilities;
   }
 
@@ -170,6 +170,40 @@ class HostAPetApi {
     const res = await this.request(`availabilities/${username}/${id}`, data, "patch");
     return res.availability;
   }
+
+  /** Booking methods ********************   */
+
+  /** Get a booking. */
+  static async getBooking(id) {
+    const res = await this.request(`bookings/id/${id}`);
+    return res.booking; 
+  }
+
+  /** Get all bookings for search data. */
+  static async getAllBookings(data) {
+    const res = await this.request("bookings/dates", data);
+    return res.bookings;
+  }
+
+  /** Add a booking. */
+  static async addBooking(username, data) {
+    data = {...data, roleId: Number(data.roleId)};
+    const res = await this.request(`bookings/${username}`, data, "post");
+    return res.booking;
+  }
+
+  /** Get bookings for a specific user. */
+  static async getUserBookings(username) {
+    const res = await this.request(`bookings/${username}`);
+    return res.bookings;
+  }
+
+  /** Delete a booking. */
+  static async deleteBooking(username, id, data={}) {
+    const res = await this.request(`bookings/${username}/${id}`, data, "delete");
+    return res;
+  }
+
 }
 
 export default HostAPetApi;

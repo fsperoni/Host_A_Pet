@@ -52,7 +52,7 @@ class Pet {
 
   /** Given a username, returns all pets owned.
    *
-   * Returns list of pets in format { ownerId, name, type, photo }
+   * Returns list of pets in format { id, ownerId, name, type, photo }
    *
    * Throws NotFoundError if pet not found.
    **/

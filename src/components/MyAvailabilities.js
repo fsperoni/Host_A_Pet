@@ -9,14 +9,12 @@ const MyAvailabilities = () => {
   const [avails, setAvails] = useState([]);
   const [roles, setRoles] = useState([]);
 
-  useEffect(function getAvailabilityAndRoles() {
-    const getAvailsAndRoles = async () => {
+  useEffect(function getAvailabilities() {
+    const getAvails = async () => {
       const userAvails = await HostAPetApi.getUserAvailabilities(currentUser.username);
       setAvails(userAvails);
-      const allRoles = await HostAPetApi.getAllRoles();
-      setRoles(allRoles);
     }
-    getAvailsAndRoles();
+    getAvails();
   }, [currentUser.username]);
   
   useEffect(function getRoles() {

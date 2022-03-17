@@ -75,7 +75,7 @@ router.get("/id/:id", ensureLoggedIn, async function (req, res, next) {
   }
 });
 
-/** GET /dates => [{ avail1 }, {avail2}, ... ]
+/** POST / => [{ avail1 }, {avail2}, ... ]
  *
  * Returns list of { id, startDate, endDate, userId, roleId }
  * for range specified in request body.
@@ -83,9 +83,10 @@ router.get("/id/:id", ensureLoggedIn, async function (req, res, next) {
  * Authorization required: logged in user
  **/
 
-router.get("/dates", ensureLoggedIn, async function (req, res, next) {
+router.post("/search/:username", ensureLoggedIn, async function (req, res, next) {
   try {
-    const availabilities = await Availability.getAll(req.body);
+    const username = req.params.username;
+    const availabilities = await Availability.getAll(username, req.body);
     return res.json({ availabilities });
   } catch (err) {
     return next(err);

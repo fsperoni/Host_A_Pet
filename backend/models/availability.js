@@ -3,6 +3,7 @@
 const db = require("../db");
 const { sqlForPartialUpdate } = require("../helpers/sql");
 const User = require("../models/user");
+const Pet = require("../models/pet");
 const { NotFoundError, BadRequestError } = require("../expressError");
 
 
@@ -41,7 +42,8 @@ class Availability {
    * Throws NotFoundError if no availability found.
    **/
 
-  static async getAll({ start, end }) {
+  static async getAll(username, { startDate, endDate, roleId }) {
+    const userId = await User.getUserId(username);
     const result = await db.query(
       `SELECT id, 
         start_date AS "startDate", 
@@ -49,17 +51,26 @@ class Availability {
         user_id AS "userId", 
         role_id AS "roleId"
         FROM availabilities
-        WHERE start_date <= $1 AND end_date >= $2`,
-      [start, end]
+        WHERE start_date <= $1 
+          AND end_date >= $2 
+          AND user_id != $3
+          AND role_id = $4`,
+      [startDate, endDate, userId, roleId]
     );
 
-    const availabilities = result.rows;
+    let availabilities = result.rows;
     if (!availabilities) throw new NotFoundError("No availabilities found!");
 
+    await Promise.
+      all(availabilities.map(async (a) => {
+        a.user = await Promise.resolve(User.getById(a.userId));
+        a.pets = await Promise.resolve(Pet.getByUserId(a.userId));
+      })).
+      catch(err => {throw new BadRequestError(err)})
     return availabilities;
   }
 
-  /** Get all USER availabilities for date range.
+  /** Get all USER availabilities.
    *
    * Returns { id, startDate, endDate, role } - list of all availabilities.
    *
@@ -135,7 +146,7 @@ class Availability {
             FROM availabilities
             WHERE id = $1
             RETURNING id`,
-      [parseInt(id)],
+      [id],
     );
     const availability = result.rows[0];
 
@@ -157,7 +168,7 @@ class Availability {
     const duplicateCheck = await db.query(
       `SELECT id, start_date, end_date
              FROM availabilities
-             WHERE user_id = $1 AND role_id = $2
+             WHERE user_id = $1 AND role_id = $2 AND id != $5
               AND (
                 ($3 >= start_date AND $3 <= end_date)
                 OR 
@@ -166,7 +177,7 @@ class Availability {
                 ($3 <= start_date AND $4 >= end_date)
               )
               `,
-      [data.userId, data.roleId, data.startDate, data.endDate],
+      [data.userId, data.roleId, data.startDate, data.endDate, id],
     );
 
     if (duplicateCheck.rows[0]) {

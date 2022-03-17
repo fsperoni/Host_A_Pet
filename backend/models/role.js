@@ -84,7 +84,7 @@ class Role {
             FROM roles
             WHERE id = $1
             RETURNING name`,
-      [parseInt(id)],
+      [id],
     );
     const role = result.rows[0];
 

@@ -11,6 +11,7 @@ import MyPets from './MyPets';
 import AdminPanel from './AdminPanel';
 import AdminRoute from './AdminRoute';
 import MyAvailabilities from './MyAvailabilities';
+import Booking from './Booking';
 
 const AllRoutes = ({logout, login, signup}) => {
   return (
@@ -26,6 +27,9 @@ const AllRoutes = ({logout, login, signup}) => {
     </Route>
     <Route exact path="/myAvailabilities" element={<PrivateRoute />}>
       <Route exact path="/myAvailabilities" element={<MyAvailabilities />}/>
+    </Route>
+    <Route exact path="/newBooking" element={<PrivateRoute />}>
+      <Route exact path="/newBooking" element={<Booking />}/>
     </Route>
     <Route exact path="/admin" element={<AdminRoute />}>
       <Route exact path="/admin" element={<AdminPanel />}/>

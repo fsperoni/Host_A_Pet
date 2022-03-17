@@ -123,6 +123,34 @@ class User {
     return user;
   }
 
+  /** Given a user id, return data about user.
+   *
+   * Returns { id, username, first_name, last_name, email, phone, postal_code, is_admin}
+   *
+   * Throws NotFoundError if user not found.
+   **/
+  
+  static async getById(id) {
+    const userRes = await db.query(
+      `SELECT id,
+      username,
+      first_name AS "firstName",
+      last_name AS "lastName",
+      email,
+      phone, 
+      postal_code AS "postalCode",
+      is_admin AS "isAdmin"
+      FROM users
+      WHERE id = $1`,
+      [id]
+    );
+      
+    const user = userRes.rows[0];
+    if (!user) throw new NotFoundError(`User not found for id: ${id}`);
+    
+    return user;
+  }
+
 
   /** Get user id from username. */
 

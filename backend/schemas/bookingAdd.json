@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "properties": {
+    "startDate": {
+      "type": "string",
+      "format": "date"
+    }, 
+    "endDate": {
+      "type": "string",
+      "format": "date"
+    }, 
+    "hostId": {
+      "type": "number"
+    },
+    "petId": {
+      "type": "number"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "startDate",
+    "endDate",
+    "userId",
+    "roleId"
+  ]
+}
