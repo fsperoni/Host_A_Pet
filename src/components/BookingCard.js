@@ -1,26 +1,39 @@
-import React, { useContext, useEffect, useState } from 'react';
-import UserContext from '../hooks/useUserContext';
-import HostAPetApi from './Api';
+import React from 'react';
 
 const BookingCard = ({ avail }) => {
-  console.log("Card",avail);
+  console.log("Card", avail);
+  let bookingCard;
+
+  if (avail.role === "Host") {
+    bookingCard = (
+      <>
+        <h2>{avail.user.username}</h2>
+        <h4>{avail.user.firstName} is available on your selected dates</h4>
+        <h4>Ratings: </h4>
+      </>
+    )
+  } else {
+    const pets = avail.pets.map(pet => (
+      <div key={pet.id} className="col-lg mt-3 mx-3 mb-1 border border-secondary">
+        <h3>{pet.name} the {pet.type}</h3>
+        <img src={pet.photo} className="mt-2 img-fluid" alt="pet" />
+      </div>
+    ))
+    bookingCard = (
+      <>
+        <h2 className="text-center">{avail.user.username}</h2>
+        <h4 className="text-center">{avail.user.firstName} needs a host. Can you help?</h4>
+        <h4>Their pets:</h4>
+        <div className="row">{pets}</div>
+      </>
+    )
+  }
   return (
 
-    <div className="BookingCard container">
-      <div>
-        <h4 className="text-center">Max distance (km):</h4>
-        <select name="distance" className="form-select">
-          <option value="">Select one</option>
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">15</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select>
-        <button className="btn btn-primary btn-block">Go</button>
-      </div>
+    <div className="BookingCard border border-secondary">
+      {bookingCard}
     </div>
   )
 }
 
-      export default BookingCard;
+export default BookingCard;

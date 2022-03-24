@@ -5,6 +5,8 @@ const { sqlForPartialUpdate } = require("../helpers/sql");
 const User = require("../models/user");
 const Pet = require("../models/pet");
 const { NotFoundError, BadRequestError } = require("../expressError");
+const Role = require("./role");
+const e = require("cors");
 
 
 /** Related functions for availabilities. */
@@ -61,12 +63,24 @@ class Availability {
     let availabilities = result.rows;
     if (!availabilities) throw new NotFoundError("No availabilities found!");
 
-    await Promise.
-      all(availabilities.map(async (a) => {
-        a.user = await Promise.resolve(User.getById(a.userId));
-        a.pets = await Promise.resolve(Pet.getByUserId(a.userId));
-      })).
-      catch(err => {throw new BadRequestError(err)})
+    const role = await Role.get(roleId);
+    availabilities.role = role;
+    // Hosts do not need to necessarily own a pet
+    if (role.name === "Host") {
+      await Promise.
+        all(availabilities.map(async (a) => {
+          a.user = await Promise.resolve(User.getById(a.userId));
+        })).
+        catch(err => { throw new BadRequestError(err) })
+    } else {
+      await Promise.
+        all(availabilities.map(async (a) => {
+          a.user = await Promise.resolve(User.getById(a.userId));
+          a.pets = await Promise.resolve(Pet.getByUserId(a.userId));
+        })).
+        catch(err => { throw new BadRequestError(err) })
+    }
+
     return availabilities;
   }
 

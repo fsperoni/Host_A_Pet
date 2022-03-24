@@ -61,7 +61,7 @@ const AvailabilitySearchForm = ({ avails, setAvails, roles}) => {
   return (
     <div className="AvailabilityAddForm mt-3">
       <div className="container">
-        <h2 className="mb-3">Start your search!</h2>
+        <h3 className="mb-3">Start your search!</h3>
         <div className="card">
           <div className="card-body">
             <form onSubmit={handleSubmit}>
