@@ -5,7 +5,8 @@ import UserContext from '../hooks/useUserContext';
 
 /** Search Availability form. */
 
-const AvailabilitySearchForm = ({ setDateRange, setAvails, roles, setBookError, setBookSuccess }) => {
+const AvailabilitySearchForm = ({ setDateRange, setAvails, roles, setBookError, 
+  setBookSuccess, setNotFound }) => {
   const { currentUser } = useContext(UserContext);
   const min = new Date().toISOString().substring(0, 10);
   const [formData, setFormData] = useState({
@@ -21,14 +22,10 @@ const AvailabilitySearchForm = ({ setDateRange, setAvails, roles, setBookError, 
     evt.preventDefault();
     try {
       const result = await HostAPetApi.getAllAvailabilities(currentUser.username, formData);
+      setNotFound(result.length === 0);
       setAvails(result);
       const dates = [formData.startDate, formData.endDate];
       setDateRange(dates);
-      // setFormData({
-      //   startDate: min,
-      //   endDate: min,
-      //   roleId: ""
-      // });
       setFormErrors([]);
       setBookError([]);
       setBookSuccess([]);
@@ -46,6 +43,7 @@ const AvailabilitySearchForm = ({ setDateRange, setAvails, roles, setBookError, 
     setBookError([]);
     setBookSuccess([]);
     setAvails([]);
+    setNotFound(false);
   }
 
   /** Handle form cancel button */
@@ -60,6 +58,7 @@ const AvailabilitySearchForm = ({ setDateRange, setAvails, roles, setBookError, 
     setBookError([]);
     setBookSuccess([]);
     setAvails([]);
+    setNotFound(false);
   }
 
   const generateOptions = () => {

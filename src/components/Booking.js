@@ -4,6 +4,7 @@ import HostAPetApi from './Api';
 import AvailabilitySearchForm from './AvailabilitySearchForm';
 import BookingCard from './BookingCard';
 import '../styles/Booking.scss'
+import Alert from './Alert';
 
 const Booking = () => {
   const { currentUser } = useContext(UserContext);
@@ -12,6 +13,7 @@ const Booking = () => {
   const [dateRange, setDateRange] = useState([]);
   const [bookError, setBookError] = useState([]);
   const [bookSuccess, setBookSuccess] = useState([]);
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(function getRoles() {
     const getAllRoles = async () => {
@@ -31,10 +33,11 @@ const Booking = () => {
     <div className="Booking col-md-6 offset-md-3 col-lg-4 offset-lg-4">
       <h2 className="text-center">New Booking</h2>
       <AvailabilitySearchForm setDateRange={setDateRange} setAvails={setAvails} 
-        roles={roles} bookError={bookError} setBookError={setBookError} 
-        bookSuccess={bookSuccess} setBookSuccess={setBookSuccess}/>
+        bookError={bookError} setBookError={setBookError} setNotFound={setNotFound}
+        bookSuccess={bookSuccess} setBookSuccess={setBookSuccess} roles={roles} />
     </div>
     <div className="container col-md-6 mb-3">
+      {notFound && <Alert type="danger" messages={["No results found!"]} />}
       {avails.length ? 
         <>
         <div className="Booking-filter">
