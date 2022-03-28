@@ -64,12 +64,12 @@ class Availability {
     if (!availabilities) throw new NotFoundError("No availabilities found!");
 
     const role = await Role.get(roleId);
-    availabilities.role = role;
     // Hosts do not need to necessarily own a pet
     if (role.name === "Host") {
       await Promise.
         all(availabilities.map(async (a) => {
           a.user = await Promise.resolve(User.getById(a.userId));
+          a.role = role.name;
         })).
         catch(err => { throw new BadRequestError(err) })
     } else {
@@ -77,6 +77,7 @@ class Availability {
         all(availabilities.map(async (a) => {
           a.user = await Promise.resolve(User.getById(a.userId));
           a.pets = await Promise.resolve(Pet.getByUserId(a.userId));
+          a.role = role.name;
         })).
         catch(err => { throw new BadRequestError(err) })
     }
@@ -86,7 +87,7 @@ class Availability {
 
   /** Get all USER availabilities.
    *
-   * Returns { id, startDate, endDate, role } - list of all availabilities.
+   * Returns { id, startDate, endDate, roleId } - list of all availabilities.
    *
    * Throws NotFoundError if no availability found.
    **/
@@ -222,6 +223,43 @@ class Availability {
     if (!availability) throw new NotFoundError("Availability not found!");
 
     return availability;
+  }
+
+  /** Split availability.
+   *
+   * Returns { success }
+   *
+   * Throws NotFoundError if availability not found.
+   * Throws BadRequestError if updated availability partially or fully within 
+   * another availability for the same user.
+   */
+
+  static async split(id, startDate, endDate) {
+    const avail = await this.get(id);
+    const availStartDate = new Date(avail.startDate).toISOString().substring(0, 10);
+    const availEndDate = new Date(avail.endDate).toISOString().substring(0, 10);
+    let start = new Date(startDate);
+    start.setDate(start.getDate() - 1);
+    start = start.toISOString().substring(0, 10);
+    let end = new Date(endDate);
+    end.setDate(end.getDate() + 1);
+    end = end.toISOString().substring(0, 10);
+    try {
+      if (startDate === availStartDate && endDate === availEndDate) {
+        await this.remove(id);
+      } else if (start < availStartDate) {
+        await this.update(id, { startDate: end });
+      } else if (end > availEndDate) {
+        await this.update(id, { endDate: start });
+      } else {
+        await this.update(id, { endDate: start });
+        await this.add({ startDate: end, endDate: avail.endDate, userId: avail.userId, roleId: avail.roleId });
+      }
+    } catch (err) {
+      console.log("Availability catch", err);
+      return false;
+    }
+    return true;
   }
 }
 

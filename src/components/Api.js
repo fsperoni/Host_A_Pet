@@ -187,7 +187,6 @@ class HostAPetApi {
 
   /** Add a booking. */
   static async addBooking(username, data) {
-    data = {...data, roleId: Number(data.roleId)};
     const res = await this.request(`bookings/${username}`, data, "post");
     return res.booking;
   }

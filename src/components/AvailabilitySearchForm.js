@@ -5,16 +5,16 @@ import UserContext from '../hooks/useUserContext';
 
 /** Search Availability form. */
 
-const AvailabilitySearchForm = ({ avails, setAvails, roles}) => {
+const AvailabilitySearchForm = ({ setDateRange, setAvails, roles, setBookError, setBookSuccess }) => {
   const { currentUser } = useContext(UserContext);
-  const min = new Date().toISOString().substring(0,10);
+  const min = new Date().toISOString().substring(0, 10);
   const [formData, setFormData] = useState({
     startDate: min,
     endDate: min,
     roleId: ""
   });
   const [formErrors, setFormErrors] = useState([]);
-  
+
 
   /** Handle form submit */
   const handleSubmit = async (evt) => {
@@ -22,12 +22,16 @@ const AvailabilitySearchForm = ({ avails, setAvails, roles}) => {
     try {
       const result = await HostAPetApi.getAllAvailabilities(currentUser.username, formData);
       setAvails(result);
-      setFormData({
-        startDate: min,
-        endDate: min,
-        roleId: ""
-      });
+      const dates = [formData.startDate, formData.endDate];
+      setDateRange(dates);
+      // setFormData({
+      //   startDate: min,
+      //   endDate: min,
+      //   roleId: ""
+      // });
       setFormErrors([]);
+      setBookError([]);
+      setBookSuccess([]);
     } catch (err) {
       setAvails([]);
       setFormErrors(err);
@@ -39,6 +43,9 @@ const AvailabilitySearchForm = ({ avails, setAvails, roles}) => {
     const { name, value } = evt.target;
     setFormData(data => ({ ...data, [name]: value }));
     setFormErrors([]);
+    setBookError([]);
+    setBookSuccess([]);
+    setAvails([]);
   }
 
   /** Handle form cancel button */
@@ -50,6 +57,9 @@ const AvailabilitySearchForm = ({ avails, setAvails, roles}) => {
       roleId: ""
     });
     setFormErrors([]);
+    setBookError([]);
+    setBookSuccess([]);
+    setAvails([]);
   }
 
   const generateOptions = () => {
@@ -69,7 +79,7 @@ const AvailabilitySearchForm = ({ avails, setAvails, roles}) => {
                 <label>Looking for a:</label>
                 <select name="roleId" className="form-select" onChange={handleChange}
                   value={formData.roleId}>
-                <option value="">Select one</option>
+                  <option value="">Select one</option>
                   {options}
                 </select>
               </div>
@@ -85,21 +95,21 @@ const AvailabilitySearchForm = ({ avails, setAvails, roles}) => {
                   value={formData.endDate} type="date" min={min}
                 />
               </div>
-              {formErrors.length>0 && <Alert type="danger" messages={formErrors} />}
+              {formErrors.length > 0 && <Alert type="danger" messages={formErrors} />}
               <div className="container mt-4">
-              <button 
-                className="btn btn-primary btn-block"
-                onClick={handleSubmit}
-              > 
-                Search
-              </button>
-              <button
-                className="btn btn-warning btn-block ms-4"
-                onClick={handleCancel}
-              >
-                Cancel
-              </button>
-            </div>
+                <button
+                  className="btn btn-primary btn-block"
+                  onClick={handleSubmit}
+                >
+                  Search
+                </button>
+                <button
+                  className="btn btn-warning btn-block ms-4"
+                  onClick={handleCancel}
+                >
+                  Cancel
+                </button>
+              </div>
             </form>
           </div>
         </div>

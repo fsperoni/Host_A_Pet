@@ -1,0 +1,11 @@
+.BookingCard {
+  
+  .alert-container {
+    display: flex;
+    justify-content: center;
+
+    .alert {
+      padding: 1rem 6rem;
+    }
+  }
+}

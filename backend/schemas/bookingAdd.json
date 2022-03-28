@@ -14,7 +14,10 @@
     "hostId": {
       "type": "number"
     },
-    "petId": {
+    "ownerId": {
+      "type": "number"
+    },
+    "availabilityId": {
       "type": "number"
     }
   },
@@ -22,7 +25,8 @@
   "required": [
     "startDate",
     "endDate",
-    "userId",
-    "roleId"
+    "hostId",
+    "ownerId",
+    "availabilityId"
   ]
 }

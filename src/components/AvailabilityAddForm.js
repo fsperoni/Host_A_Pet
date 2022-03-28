@@ -67,19 +67,19 @@ const AvailabilityAddForm = ({ avails, setAvails, roles}) => {
               <div className="form-group">
                 <label>Start date:</label>
                 <input name="startDate" className="form-control" onChange={handleChange}
-                  value={formData.startDate} type="date" min={min}
+                  value={formData.startDate} type="date" min={min} required
                 />
               </div>
               <div className="form-group">
                 <label>End date:</label>
                 <input name="endDate" className="form-control" onChange={handleChange}
-                  value={formData.endDate} type="date" min={min}
+                  value={formData.endDate} type="date" min={min} required
                 />
               </div>
               <div className="form-group">
                 <label>Role:</label>
                 <select name="roleId" className="form-select" onChange={handleChange}
-                  value={formData.roleId}>
+                  value={formData.roleId} required > 
                 <option value="">Select one</option>
                   {options}
                 </select>

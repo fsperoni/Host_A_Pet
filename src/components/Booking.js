@@ -9,6 +9,9 @@ const Booking = () => {
   const { currentUser } = useContext(UserContext);
   const [avails, setAvails] = useState([]);
   const [roles, setRoles] = useState([]);
+  const [dateRange, setDateRange] = useState([]);
+  const [bookError, setBookError] = useState([]);
+  const [bookSuccess, setBookSuccess] = useState([]);
 
   useEffect(function getRoles() {
     const getAllRoles = async () => {
@@ -19,14 +22,17 @@ const Booking = () => {
   }, [currentUser.username]);
 
   const bookingCards = avails.map(a => (
-    <BookingCard key={a.id} avail={a} />
+    <BookingCard key={a.id} avail={a} dateRange={dateRange} bookError={bookError} 
+    setBookError={setBookError} bookSuccess={bookSuccess} setBookSuccess={setBookSuccess}/>
   ));
 
   return (
     <>
     <div className="Booking col-md-6 offset-md-3 col-lg-4 offset-lg-4">
       <h2 className="text-center">New Booking</h2>
-      <AvailabilitySearchForm avails={avails} setAvails={setAvails} roles={roles} />
+      <AvailabilitySearchForm setDateRange={setDateRange} setAvails={setAvails} 
+        roles={roles} bookError={bookError} setBookError={setBookError} 
+        bookSuccess={bookSuccess} setBookSuccess={setBookSuccess}/>
     </div>
     <div className="container col-md-6 mb-3">
       {avails.length ? 

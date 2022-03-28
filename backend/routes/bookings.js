@@ -24,12 +24,27 @@ const router = express.Router();
 
 router.post("/:username", ensureCorrectUserOrAdmin, async function (req, res, next) {
   try {
-    const validator = jsonschema.validate(req.body, bookingAddSchema);
+    const username = req.params.username;
+    const userId = await User.getUserId(username);
+    const startDate = req.body.dateRange[0];
+    const endDate = req.body.dateRange[1];
+    let sendData = {
+      startDate, 
+      endDate,
+      availabilityId: req.body.id,
+    }
+    if (req.body.role === "Host") {
+      sendData = {...sendData, ownerId: userId, hostId: req.body.userId}
+    } else {
+      sendData = {...sendData, hostId: userId, ownerId: req.body.userId}
+    }
+    
+    const validator = jsonschema.validate(sendData, bookingAddSchema);
     if (!validator.valid) {
       const errs = validator.errors.map(e => e.stack);
       throw new BadRequestError(errs);
     }
-    const booking = await Booking.add(req.body);
+    const booking = await Booking.add(sendData);
     return res.json({ booking });
   } catch (err) {
     return next(err);

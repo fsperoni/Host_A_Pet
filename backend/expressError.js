@@ -36,11 +36,19 @@ class BadRequestError extends ExpressError {
   }
 }
 
-/** 403 BAD REQUEST error. */
+/** 403 FORBIDDEN error. */
 
 class ForbiddenError extends ExpressError {
-  constructor(message = "Bad Request") {
+  constructor(message = "Forbidden!") {
     super(message, 403);
+  }
+}
+
+/** 500 Server error. */
+
+class ServerError extends ExpressError {
+  constructor(message = "Server error") {
+    super(message, 500);
   }
 }
 
@@ -50,4 +58,5 @@ module.exports = {
   UnauthorizedError,
   BadRequestError,
   ForbiddenError,
+  ServerError
 };

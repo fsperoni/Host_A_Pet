@@ -62,12 +62,12 @@ const PetEditForm = ({pet, pets, setPets, setShowEditForm}) => {
               <div className="form-group">
                 <label>Name:</label>
                 <input name="name" className="form-control" onChange={handleChange}
-                  value={formData.name}
+                  value={formData.name} required
                 />
               </div>
               <div className="form-group">
                 <label>Type:</label>
-                <select name="type" className="form-select" onChange={handleChange}>
+                <select name="type" required className="form-select" onChange={handleChange}>
                   <option value={formData.type}>{formData.type}</option>
                   {options}
                 </select>
