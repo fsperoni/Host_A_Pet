@@ -17,7 +17,7 @@ const router = express.Router();
 
 /** POST /[username] => { booking }
  *
- * Returns { id, startDate, endDate, hostId, petId }
+ * Returns { id, startDate, endDate, hostId, ownerId }
  *
  * Authorization required: own user or admin
  **/
@@ -53,7 +53,7 @@ router.post("/:username", ensureCorrectUserOrAdmin, async function (req, res, ne
 
 /** GET /[username] => [{ booking1 }, {booking2}, ... ]
  *
- * Returns list of { id, startDate, endDate, hostId, petId }
+ * Returns list of { id, startDate, endDate, role1, role2, user: {username, rating} }
  * for specified user.
  *
  * Authorization required: own user or admin
@@ -63,7 +63,7 @@ router.get("/:username", ensureCorrectUserOrAdmin, async function (req, res, nex
   const username = req.params.username;
   try {
     const bookings = await Booking.getUserAll(username);
-    return res.json({ availabilities });
+    return res.json({ bookings });
   } catch (err) {
     return next(err);
   }
@@ -72,7 +72,7 @@ router.get("/:username", ensureCorrectUserOrAdmin, async function (req, res, nex
 
 /** GET /[id] => { booking }
  *
- * Returns { id, startDate, endDate, hostId, petId }
+ * Returns { id, startDate, endDate, hostId, ownerId }
  *
  * Authorization required: logged in user
  **/
@@ -86,9 +86,9 @@ router.get("/id/:id", ensureLoggedIn, async function (req, res, next) {
   }
 });
 
-/** GET /dates => [{ avail1 }, {avail2}, ... ]
+/** GET /dates => [{ booking1 }, {booking2}, ... ]
  *
- * Returns list of { id, startDate, endDate, hostId, petId }
+ * Returns list of { id, startDate, endDate, hostId, ownerId }
  * for data specified in request body.
  *
  * Authorization required: logged in user

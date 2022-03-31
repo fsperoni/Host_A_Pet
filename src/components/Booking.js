@@ -53,6 +53,7 @@ const Booking = () => {
           <button className="btn btn-primary btn-block ms-3">
             Go
           </button>
+          <h4 className="text-danger ms-3">Coming soon!</h4>
         </div>
         <div className="d-grid mt-4">{bookingCards}</div>
         </> :

@@ -12,6 +12,7 @@ import AdminPanel from './AdminPanel';
 import AdminRoute from './AdminRoute';
 import MyAvailabilities from './MyAvailabilities';
 import Booking from './Booking';
+import MyBookings from './MyBookings';
 
 const AllRoutes = ({logout, login, signup}) => {
   return (
@@ -30,6 +31,9 @@ const AllRoutes = ({logout, login, signup}) => {
     </Route>
     <Route exact path="/newBooking" element={<PrivateRoute />}>
       <Route exact path="/newBooking" element={<Booking />}/>
+    </Route>
+    <Route exact path="/myBookings" element={<PrivateRoute />}>
+      <Route exact path="/myBookings" element={<MyBookings />}/>
     </Route>
     <Route exact path="/admin" element={<AdminRoute />}>
       <Route exact path="/admin" element={<AdminPanel />}/>

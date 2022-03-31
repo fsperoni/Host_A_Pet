@@ -26,23 +26,21 @@ CREATE TABLE pets (
 );
 
 CREATE TABLE hostings (
-  id SERIAL PRIMARY KEY,
-  start_date DATE NOT NULL,
-  end_date DATE NOT NULL,
-  host_id INTEGER NOT NULL
-    REFERENCES users ON DELETE CASCADE,
-  owner_id INTEGER NOT NULL
+  id SERIAL PRIMARY KEY, 
+  start_date DATE NOT NULL, 
+  end_date DATE NOT NULL, 
+  host_id INTEGER NOT NULL 
+    REFERENCES users ON DELETE CASCADE, 
+  owner_id INTEGER NOT NULL 
     REFERENCES users ON DELETE CASCADE
 );
 
 CREATE TABLE reviews (
-  id SERIAL PRIMARY KEY,
-  rating INTEGER NOT NULL,
-  comments TEXT,
-  reviewer_id INTEGER NOT NULL
-    REFERENCES users ON DELETE CASCADE,
-  hosting_id INTEGER NOT NULL
-    REFERENCES hostings ON DELETE CASCADE
+  rating INTEGER NOT NULL, 
+  comments TEXT, 
+  reviewer_id INTEGER REFERENCES users ON DELETE CASCADE, 
+  reviewee_id INTEGER REFERENCES users ON DELETE CASCADE, 
+  PRIMARY KEY (reviewer_id, reviewee_id)
 );
 
 CREATE TABLE availabilities (

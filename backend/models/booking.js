@@ -42,7 +42,7 @@ class Booking {
    * Throws BadRequestError if booking partially or fully within 
    * another booking for the same host or owner.
    **/
-  static async add({ startDate, endDate, hostId, ownerId, availabilityId}) {
+  static async add({ startDate, endDate, hostId, ownerId, availabilityId }) {
     if (startDate > endDate) throw new BadRequestError("End date must be greater than start date!");
     const duplicateCheck = await db.query(
       `SELECT id
@@ -64,7 +64,6 @@ class Booking {
     }
 
     //Breakdown availability, if needed.
-    // TODO - use promises instead.
     const isSplit = await Availability.split(availabilityId, startDate, endDate);
 
     if (!isSplit) throw new ServerError("Unable to update availability!");
@@ -98,16 +97,36 @@ class Booking {
           start_date AS "startDate", 
           end_date AS "endDate", 
           host_id AS "hostId", 
-          owner_id AS "ownerId",
+          owner_id AS "ownerId"
           FROM hostings
           WHERE owner_id = $1 OR host_id = $1`,
       [userId]
     );
 
-    const bookings = result.rows;
+    let bookings = result.rows;
     if (!bookings) throw new NotFoundError("No bookings found!");
+    // return bookings;
+    await Promise.all(bookings.map(async (b) => {
+      if (b.hostId === userId) { // user is a host
+        b.role1 = "Host";
+        b.role2 = "Pet Owner";
+        const user = await Promise.resolve(User.getById(b.ownerId));
+        b.user = {username: user.username, rating: 0}
+      } else if (b.ownerId === userId) { //user is pet owner
+        b.role1 = "Pet Owner";
+        b.role2 = "Host";
+        const user = await Promise.resolve(User.getById(b.hostId));
+        b.user = {username: user.username, rating: 0}
+      } else {
+        throw new BadRequestError("Unable to fetch booking");
+      }
+      b.startDate = new Date(b.startDate).toISOString().substring(0, 10);
+      b.endDate = new Date(b.endDate).toISOString().substring(0, 10);
+    }));
 
     return bookings;
+
+
   }
 
   /** Get all bookings for date range and role.
