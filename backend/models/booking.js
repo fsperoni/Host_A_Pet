@@ -105,24 +105,25 @@ class Booking {
 
     let bookings = result.rows;
     if (!bookings) throw new NotFoundError("No bookings found!");
-    // return bookings;
+    
     await Promise.all(bookings.map(async (b) => {
       if (b.hostId === userId) { // user is a host
         b.role1 = "Host";
         b.role2 = "Pet Owner";
         const user = await Promise.resolve(User.getById(b.ownerId));
-        b.user = {username: user.username, rating: 0}
+        b.user = { username: user.username, rating: 0 }
       } else if (b.ownerId === userId) { //user is pet owner
         b.role1 = "Pet Owner";
         b.role2 = "Host";
         const user = await Promise.resolve(User.getById(b.hostId));
-        b.user = {username: user.username, rating: 0}
+        b.user = { username: user.username, rating: 0 }
       } else {
         throw new BadRequestError("Unable to fetch booking");
       }
       b.startDate = new Date(b.startDate).toISOString().substring(0, 10);
       b.endDate = new Date(b.endDate).toISOString().substring(0, 10);
-    }));
+    })).
+      catch(err => { throw new BadRequestError(err) });
 
     return bookings;
 

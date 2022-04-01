@@ -36,11 +36,13 @@ CREATE TABLE hostings (
 );
 
 CREATE TABLE reviews (
-  rating INTEGER NOT NULL, 
+  id SERIAL PRIMARY KEY,
+  rating INTEGER NOT NULL,
   comments TEXT, 
-  reviewer_id INTEGER REFERENCES users ON DELETE CASCADE, 
-  reviewee_id INTEGER REFERENCES users ON DELETE CASCADE, 
-  PRIMARY KEY (reviewer_id, reviewee_id)
+  reviewer_id INTEGER NOT NULL 
+    REFERENCES users ON DELETE CASCADE, 
+  reviewee_id INTEGER NOT NULL 
+    REFERENCES users ON DELETE CASCADE
 );
 
 CREATE TABLE availabilities (

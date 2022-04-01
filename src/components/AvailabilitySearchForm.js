@@ -22,7 +22,6 @@ const AvailabilitySearchForm = ({ setDateRange, setAvails, roles, setBookError,
     evt.preventDefault();
     try {
       const result = await HostAPetApi.getAllAvailabilities(currentUser.username, formData);
-      console.log(result);
       setNotFound(result.length === 0);
       setAvails(result);
       const dates = [formData.startDate, formData.endDate];

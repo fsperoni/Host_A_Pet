@@ -203,6 +203,40 @@ class HostAPetApi {
     return res;
   }
 
+  /** Review methods ********************   */
+
+  /** Get a review. */
+  static async getReview(id) {
+    const res = await this.request(`reviews/id/${id}`);
+    return res.review; 
+  }
+
+  /** Add a review. */
+  static async addReview(username, data) {
+    data = {...data, rating: Number(data.rating)};
+    const res = await this.request(`reviews/${username}`, data, "post");
+    return res.review;
+  }
+
+  /** Get reviews for a specific user. */
+  static async getUserReviews(username) {
+    const res = await this.request(`reviews/${username}`);
+    return res.reviews;
+  }
+
+  /** Delete a review. */
+  static async deleteReview(username, id, data={}) {
+    const res = await this.request(`reviews/${username}/${id}`, data, "delete");
+    return res;
+  }
+
+  /** Update a review. */
+  static async updateReview(username, id, data) {
+    data = {...data, rating: Number(data.rating)};
+    const res = await this.request(`reviews/${username}/${id}`, data, "patch");
+    return res.review;
+  }
+
 }
 
 export default HostAPetApi;

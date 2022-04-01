@@ -15,6 +15,7 @@ const petRoutes = require("./routes/pets");
 const roleRoutes = require("./routes/roles");
 const availRoutes = require("./routes/availabilities");
 const bookingRoutes = require("./routes/bookings");
+const reviewRoutes = require("./routes/reviews");
 
 const morgan = require("morgan");
 
@@ -32,6 +33,7 @@ app.use("/pets", petRoutes);
 app.use("/roles", roleRoutes);
 app.use("/availabilities", availRoutes);
 app.use("/bookings", bookingRoutes);
+app.use("/reviews", reviewRoutes);
 
 
 // Handle 404 errors

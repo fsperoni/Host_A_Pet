@@ -256,7 +256,6 @@ class Availability {
         await this.add({ startDate: end, endDate: avail.endDate, userId: avail.userId, roleId: avail.roleId });
       }
     } catch (err) {
-      console.log("Availability catch", err);
       return false;
     }
     return true;
