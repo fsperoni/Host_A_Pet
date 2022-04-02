@@ -21,7 +21,7 @@ const SignupForm = ({ signup }) => {
     evt.preventDefault();
     const result = await signup(formData);
     if (result.success) {
-      history("/dashboard");
+      history("/");
     } else {
       setFormErrors(result.errors);
     }

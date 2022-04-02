@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="BookingCard border border-secondary"
+  >
+    <h2
+      class="text-center"
+    >
+      testuser
+    </h2>
+    <h4
+      class="text-center"
+    >
+      Test needs a host. Can you help?
+    </h4>
+    <h4>
+      Their pets:
+    </h4>
+    <div
+      class="row"
+    >
+      <div
+        class="col-lg mt-3 mb-1"
+      >
+        <h3>
+          Garfield1 the Dog
+        </h3>
+        <img
+          alt="pet"
+          class="mt-2 img-fluid"
+          src="/static/media/dog.4b90f018c1cda3590605.jpeg"
+        />
+      </div>
+      <div
+        class="col-lg mt-3 mb-1"
+      >
+        <h3>
+          Garfield0 the Cat
+        </h3>
+        <img
+          alt="pet"
+          class="mt-2 img-fluid"
+          src="/static/media/cat.590ca8590214640ca23b.png"
+        />
+      </div>
+    </div>
+    <div
+      class="row justify-content-center my-3"
+    >
+      <button
+        class="col-2 btn btn-primary btn-block"
+      >
+        <data
+          value="45"
+        />
+        Book!
+      </button>
+    </div>
+    <div
+      class="alert-container"
+    />
+  </div>
+</DocumentFragment>
+`;

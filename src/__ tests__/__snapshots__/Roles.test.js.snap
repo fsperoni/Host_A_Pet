@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="Roles"
+  >
+    <div
+      class="container"
+    >
+      <h2
+        class="mb-3"
+      >
+        Roles
+      </h2>
+      <h3
+        class="ms-2"
+      >
+        No roles added yet
+      </h3>
+    </div>
+    <div
+      class="RoleAddForm mt-3 mb-3"
+    >
+      <div
+        class="container"
+      >
+        <h2
+          class="mb-3"
+        >
+          Add a Role
+        </h2>
+        <div
+          class="card"
+        >
+          <div
+            class="card-body"
+          >
+            <form>
+              <div
+                class="form-group"
+              >
+                <label>
+                  Name:
+                </label>
+                <input
+                  class="form-control"
+                  name="name"
+                  required=""
+                  value=""
+                />
+              </div>
+              <div
+                class="container mt-4"
+              >
+                <button
+                  class="btn btn-primary btn-block"
+                >
+                  Add
+                </button>
+                <button
+                  class="btn btn-warning btn-block ms-4"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

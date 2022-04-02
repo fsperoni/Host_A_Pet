@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="container mt-3"
+  >
+    <h1
+      class="text-center"
+    >
+      Host a Pet!
+    </h1>
+    <p
+      class="text-center"
+    >
+      We connect pet owners and pet hosts for amazing experiences. Sign up today and either search for a pet to host or someone to host your pet. You can browse by distance from your postal code, or filter results by host and pet owner ratings.
+    </p>
+    <p>
+      Review hostings, assigning a score, or go through previous hostings feedback to help you choose the best host for your pet, or the best pet for you to host.
+    </p>
+    <img
+      class="img-fluid rounded mx-auto d-block"
+      src="pets.jpeg"
+    />
+  </div>
+</DocumentFragment>
+`;

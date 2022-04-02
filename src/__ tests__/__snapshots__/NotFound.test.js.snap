@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="NotFound"
+  >
+    <h2
+      class="text-center"
+    >
+      Hmmm. I can't seem to find what you want.
+    </h2>
+    <img
+      alt="Not Found"
+      src="oops.png"
+    />
+  </div>
+</DocumentFragment>
+`;

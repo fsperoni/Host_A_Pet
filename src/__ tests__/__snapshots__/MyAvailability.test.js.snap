@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  Host2022-04-022022-04-20
+  <div
+    class="container"
+  >
+    <button
+      class="btn btn-sm btn-primary"
+    >
+      Edit
+    </button>
+    <button
+      class="btn btn-sm btn-danger ms-2"
+    >
+      <data
+        value="1"
+      />
+      Delete
+    </button>
+  </div>
+</DocumentFragment>
+`;

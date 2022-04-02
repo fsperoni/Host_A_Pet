@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 import Home from "./Home";
 import NotFound from "./NotFound";
 import LoginForm from "./LoginForm";
-import Dashboard from "./Dashboard";
 import SignupForm from './SignupForm';
 import MyProfileForm from './MyProfileForm';
 import PrivateRoute from './PrivateRoute';
@@ -38,7 +37,6 @@ const AllRoutes = ({logout, login, signup}) => {
     <Route exact path="/admin" element={<AdminRoute />}>
       <Route exact path="/admin" element={<AdminPanel />}/>
     </Route>
-    <Route exact path="/dashboard" element={<Dashboard />}/>
     <Route path="/*" element={<NotFound />} />
   </Routes>
   )

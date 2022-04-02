@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="card mb-3"
+  >
+    <div
+      class="card-header"
+    >
+      Host
+    </div>
+    <div
+      class="card-body"
+    >
+      <h5
+        class="card-title"
+      >
+        Booking Details:
+      </h5>
+      <p>
+        Dates: 2022-04-16 - 2022-04-30
+      </p>
+      <p>
+        Pet Owner: testadmin
+      </p>
+      <p>
+        User Ratings: 4.50
+      </p>
+      <button
+        class="btn btn-primary"
+      >
+        Review
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

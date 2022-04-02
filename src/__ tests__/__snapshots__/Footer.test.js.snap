@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <footer
+    class="footer mt-auto py-3"
+  >
+    <p
+      class="text-center my-auto"
+    >
+      © Fabio Speroni 2022
+    </p>
+  </footer>
+</DocumentFragment>
+`;

@@ -15,7 +15,7 @@ const LoginForm = ({ login }) => {
     evt.preventDefault();
     const result = await login(formData);
     if (result.success) {
-      history("/dashboard");
+      history("/");
     } else {
       setFormErrors(result.errors);
     }

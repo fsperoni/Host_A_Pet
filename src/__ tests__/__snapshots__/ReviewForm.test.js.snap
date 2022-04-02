@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="ReviewForm mt-3"
+  >
+    <div
+      class="container"
+    >
+      <h2
+        class="mb-3"
+      >
+        Your review
+      </h2>
+      <div
+        class="card"
+      >
+        <div
+          class="card-body"
+        >
+          <form>
+            <div
+              class="form-group"
+            >
+              <label>
+                Rating:
+              </label>
+              <select
+                class="form-select"
+                name="rating"
+                required=""
+              >
+                <option
+                  required=""
+                  value=""
+                >
+                  Select one
+                </option>
+                <option
+                  value="5"
+                >
+                  5
+                </option>
+                <option
+                  value="4"
+                >
+                  4
+                </option>
+                <option
+                  value="3"
+                >
+                  3
+                </option>
+                <option
+                  value="2"
+                >
+                  2
+                </option>
+                <option
+                  value="1"
+                >
+                  1
+                </option>
+                <option
+                  value="0"
+                >
+                  0
+                </option>
+              </select>
+            </div>
+            <div
+              class="form-group"
+            >
+              <label>
+                Comments:
+              </label>
+              <textarea
+                class="form-control"
+                name="comments"
+              />
+            </div>
+            <div
+              class="container mt-4"
+            >
+              <button
+                class="btn btn-primary btn-block"
+              >
+                Save
+              </button>
+              <button
+                class="btn btn-warning btn-block ms-4"
+              >
+                Cancel
+              </button>
+              <div
+                class="alert-container"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

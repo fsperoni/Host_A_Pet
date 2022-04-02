@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <nav
+    class="navbar navbar-expand-sm"
+    direction="horizontal"
+  >
+    <div
+      class="container-fluid"
+    >
+      <a
+        aria-current="page"
+        class="navbar-brand active"
+        href="/"
+      >
+        <div
+          class="d-flex"
+        >
+          <img
+            alt="Host a Pet"
+            src="logo.png"
+          />
+          <h1
+            class="my-auto"
+          >
+            Host a Pet
+          </h1>
+        </div>
+      </a>
+      <ul
+        class="ms-5 navbar-nav"
+      >
+        <li
+          class="nav-item"
+        >
+          <a
+            aria-current="page"
+            class="mr-2 active"
+            href="/"
+          >
+            Home
+          </a>
+        </li>
+        <li
+          class="nav-item"
+        >
+          <a
+            class="mr-2"
+            href="/newBooking"
+          >
+            New Booking
+          </a>
+        </li>
+        <li
+          class="nav-item"
+        >
+          <a
+            class="mr-2"
+            href="/myBookings"
+          >
+            My Bookings
+          </a>
+        </li>
+        <li
+          class="nav-item"
+        >
+          <a
+            class="mr-2"
+            href="/myAvailabilities"
+          >
+            My Availabilities
+          </a>
+        </li>
+        <li
+          class="nav-item"
+        >
+          <a
+            class="mr-2"
+            href="/myPets"
+          >
+            My Pets
+          </a>
+        </li>
+        <li
+          class="nav-item"
+        >
+          <a
+            class=""
+            href="/myProfile"
+          >
+            My Profile
+          </a>
+        </li>
+      </ul>
+      <div
+        class="login"
+      >
+        <span
+          class="me-3"
+        >
+          Hello testUser!
+        </span>
+        <a
+          href="/"
+        >
+          Log out
+        </a>
+      </div>
+    </div>
+  </nav>
+</DocumentFragment>
+`;

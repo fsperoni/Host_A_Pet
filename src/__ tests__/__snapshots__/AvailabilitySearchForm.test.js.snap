@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="AvailabilityAddForm mt-3"
+  >
+    <div
+      class="container"
+    >
+      <h3
+        class="mb-3"
+      >
+        Start your search!
+      </h3>
+      <div
+        class="card"
+      >
+        <div
+          class="card-body"
+        >
+          <form>
+            <div
+              class="form-group"
+            >
+              <label>
+                Looking for a:
+              </label>
+              <select
+                class="form-select"
+                name="roleId"
+              >
+                <option
+                  value=""
+                >
+                  Select one
+                </option>
+                <option
+                  value="1"
+                >
+                  Host
+                </option>
+                <option
+                  value="2"
+                >
+                  Pet Owner
+                </option>
+              </select>
+            </div>
+            <div
+              class="form-group"
+            >
+              <label>
+                From:
+              </label>
+              <input
+                class="form-control"
+                min="2022-04-02"
+                name="startDate"
+                type="date"
+                value="2022-04-02"
+              />
+            </div>
+            <div
+              class="form-group"
+            >
+              <label>
+                Until:
+              </label>
+              <input
+                class="form-control"
+                min="2022-04-02"
+                name="endDate"
+                type="date"
+                value="2022-04-02"
+              />
+            </div>
+            <div
+              class="container mt-4"
+            >
+              <button
+                class="btn btn-primary btn-block"
+              >
+                Search
+              </button>
+              <button
+                class="btn btn-warning btn-block ms-4"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

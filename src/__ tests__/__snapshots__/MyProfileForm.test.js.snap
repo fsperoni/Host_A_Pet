@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="col-md-6 col-lg-4 offset-md-3 offset-lg-4 mb-3"
+  >
+    <h3>
+      Profile
+    </h3>
+    <div
+      class="card"
+    >
+      <div
+        class="card-body"
+      >
+        <form>
+          <div
+            class="form-group"
+          >
+            <label>
+              First Name:
+            </label>
+            <input
+              class="form-control"
+              name="firstName"
+              value=""
+            />
+          </div>
+          <div
+            class="form-group"
+          >
+            <label>
+              Last Name:
+            </label>
+            <input
+              class="form-control"
+              name="lastName"
+              value=""
+            />
+          </div>
+          <div
+            class="form-group"
+          >
+            <label>
+              Email:
+            </label>
+            <input
+              class="form-control"
+              name="email"
+              value="noemail@example.com"
+            />
+          </div>
+          <div
+            class="form-group"
+          >
+            <label>
+              Phone:
+            </label>
+            <input
+              class="form-control"
+              name="phone"
+              value="555-123-4567"
+            />
+          </div>
+          <div
+            class="form-group"
+          >
+            <label>
+              Postal code:
+            </label>
+            <input
+              class="form-control"
+              name="postalCode"
+              value=""
+            />
+          </div>
+          <div
+            class="form-group"
+          >
+            <label>
+              Confirm password to make changes:
+            </label>
+            <input
+              class="form-control"
+              name="password"
+              type="password"
+              value=""
+            />
+          </div>
+          <div
+            class="container mt-4"
+          >
+            <button
+              class="btn btn-primary btn-block"
+            >
+              Save Changes
+            </button>
+            <button
+              class="btn btn-warning btn-block ms-4"
+            >
+              Cancel
+            </button>
+            <button
+              class="btn btn-danger btn-block ms-4"
+            >
+              Delete Account
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

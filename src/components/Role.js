@@ -1,11 +1,9 @@
 import React, { useContext, useState } from "react";
-import UserContext from "../hooks/useUserContext";
 import HostAPetApi from "./Api";
 import RoleEditForm from "./RoleEditForm";
 
 const Role = ({ role, roles, setRoles }) => {
   const [showEditForm, setShowEditForm] = useState(false);
-  const { currentUser } = useContext(UserContext);
 
   const handleEditRole = () => {
     setShowEditForm(!showEditForm);
