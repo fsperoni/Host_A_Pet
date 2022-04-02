@@ -21,7 +21,6 @@ useEffect(function getMyReviews() {
   const getReviews = async () => {
     const userReviews = await HostAPetApi.getUserReviews(currentUser.username);
     setReviews(userReviews);
-    console.log("All", userReviews);
   }
   getReviews();
 }, [currentUser.username]);

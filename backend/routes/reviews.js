@@ -32,7 +32,6 @@ router.post("/:username", ensureCorrectUserOrAdmin, async function (req, res, ne
     let data = { ...req.body, reviewerId, revieweeId };
     delete data.reviewer;
     delete data.reviewee;
-    console.log("Post",data);
     const validator = jsonschema.validate(data, reviewAddSchema);
     if (!validator.valid) {
       const errs = validator.errors.map(e => e.stack);
@@ -113,7 +112,6 @@ router.patch("/:username/:id", ensureCorrectUserOrAdmin, async function (req, re
     let data = { ...req.body, reviewerId, revieweeId };
     delete data.reviewer;
     delete data.reviewee;
-    console.log("Patch",data);
     const validator = jsonschema.validate(data, reviewUpdateSchema);
     if (!validator.valid) {
       const errs = validator.errors.map(e => e.stack);

@@ -3,7 +3,7 @@
 const db = require("../db");
 const bcrypt = require("bcrypt");
 const { sqlForPartialUpdate } = require("../helpers/sql");
-const { NotFoundError, BadRequestError, UnauthorizedError,} = require("../expressError");
+const { NotFoundError, BadRequestError, UnauthorizedError, } = require("../expressError");
 
 const { BCRYPT_WORK_FACTOR } = require("../config.js");
 
@@ -19,7 +19,7 @@ class User {
    **/
   static async authenticate(username, password) {
     const result = await db.query(
-          `SELECT username,
+      `SELECT username,
                   password,
                   first_name AS "firstName",
                   last_name AS "lastName",
@@ -30,7 +30,7 @@ class User {
 
            FROM users
            WHERE username = $1`,
-        [username],
+      [username],
     );
 
     const user = result.rows[0];
@@ -55,10 +55,10 @@ class User {
 
   static async register({ username, password, firstName, lastName, email, phone, postalCode, isAdmin }) {
     const duplicateCheck = await db.query(
-          `SELECT username
+      `SELECT username
            FROM users
            WHERE username = $1`,
-        [username],
+      [username],
     );
 
     if (duplicateCheck.rows[0]) {
@@ -68,7 +68,7 @@ class User {
     const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
     const result = await db.query(
-          `INSERT INTO users
+      `INSERT INTO users
            (username,
             password,
             first_name,
@@ -80,29 +80,29 @@ class User {
            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
            RETURNING username, first_name AS "firstName", last_name AS "lastName", email, phone, 
             postal_code AS "postalCode", is_admin AS "isAdmin"`,
-        [
-          username,
-          hashedPassword,
-          firstName,
-          lastName,
-          email,
-          phone, 
-          postalCode,
-          isAdmin
-        ]
+      [
+        username,
+        hashedPassword,
+        firstName,
+        lastName,
+        email,
+        phone,
+        postalCode,
+        isAdmin
+      ]
     );
 
     return result.rows[0];
   }
 
-  
+
   /** Given a username, return data about user.
    *
    * Returns { username, first_name, last_name, email, phone, postal_code, is_admin}
    *
    * Throws NotFoundError if user not found.
    **/
-  
+
   static async get(username) {
     const userRes = await db.query(
       `SELECT id,
@@ -117,10 +117,10 @@ class User {
       WHERE username = $1`,
       [username]
     );
-      
+
     const user = userRes.rows[0];
     if (!user) throw new NotFoundError(`User not found: ${username}`);
-    
+
     return user;
   }
 
@@ -130,7 +130,7 @@ class User {
    *
    * Throws NotFoundError if user not found.
    **/
-  
+
   static async getById(id) {
     const userRes = await db.query(
       `SELECT id,
@@ -145,10 +145,10 @@ class User {
       WHERE id = $1`,
       [id]
     );
-      
+
     const user = userRes.rows[0];
     if (!user) throw new NotFoundError(`User not found for id: ${id}`);
-    
+
     return user;
   }
 
@@ -165,7 +165,7 @@ class User {
 
     const user = result.rows[0];
     if (!user) throw new NotFoundError(`User not found: ${username}`);
-    
+
     return user.id;
   }
 
@@ -174,11 +174,11 @@ class User {
 
   static async remove(username) {
     const result = await db.query(
-          `DELETE
+      `DELETE
            FROM users
            WHERE username = $1
            RETURNING username`,
-        [username],
+      [username],
     );
     const user = result.rows[0];
 
@@ -209,13 +209,13 @@ class User {
     }
 
     const { setCols, values } = sqlForPartialUpdate(
-        data,
-        {
-          firstName: "first_name",
-          lastName: "last_name",
-          postalCode: "postal_code",
-          isAdmin: "is_admin"
-        });
+      data,
+      {
+        firstName: "first_name",
+        lastName: "last_name",
+        postalCode: "postal_code",
+        isAdmin: "is_admin"
+      });
     const usernameVarIdx = "$" + (values.length + 1);
 
     const querySql = `UPDATE users 
@@ -236,6 +236,28 @@ class User {
     delete user.password;
     return user;
   }
+
+  /** Get average rating for a given user id. 
+   * Returns the average rating as a string with two decimal point precision.
+  */
+  static async getAverageRating(id) {
+
+    // check if user id is valid:
+    const user = await User.getById(id);
+    if (!user) throw new NotFoundError(`No user: ${username}`);
+
+    const result = await db.query(`
+      SELECT AVG(rating)
+        FROM reviews
+        WHERE reviewee_id = $1`,
+      [id]);
+
+    if (!result.rows[0]) return 0;
+    const rating = Number(result.rows[0].avg).toFixed(2);
+    return rating;
+    
+ }
+
 
 }
 

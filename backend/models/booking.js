@@ -111,12 +111,14 @@ class Booking {
         b.role1 = "Host";
         b.role2 = "Pet Owner";
         const user = await Promise.resolve(User.getById(b.ownerId));
-        b.user = { username: user.username, rating: 0 }
+        const rating = await Promise.resolve(User.getAverageRating(b.ownerId));
+        b.user = { username: user.username, rating }
       } else if (b.ownerId === userId) { //user is pet owner
         b.role1 = "Pet Owner";
         b.role2 = "Host";
         const user = await Promise.resolve(User.getById(b.hostId));
-        b.user = { username: user.username, rating: 0 }
+        const rating = await Promise.resolve(User.getAverageRating(b.hostId));
+        b.user = { username: user.username, rating }
       } else {
         throw new BadRequestError("Unable to fetch booking");
       }

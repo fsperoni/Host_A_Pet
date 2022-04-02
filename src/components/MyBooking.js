@@ -4,15 +4,15 @@ import ReviewForm from './ReviewForm';
 
 const MyBooking = ({ booking, reviews }) => {
   const [showReviewForm, setShowReviewForm] = useState(false);
-  const [review, setReview] = useState([]);
+  const [review, setReview] = useState({});
   const { currentUser } = useContext(UserContext);
 
   useEffect(function getReview() {
     const bookingReview = reviews.filter(review => (
       review.reviewer === currentUser.username &&
       review.reviewee === booking.user.username))
-    setReview(bookingReview);
-  }, [reviews]);
+    setReview(bookingReview[0]);
+  }, []);
 
   const handleReview = () => {
     setShowReviewForm(!showReviewForm);
@@ -31,7 +31,7 @@ const MyBooking = ({ booking, reviews }) => {
           Review
         </button>
         {showReviewForm ?
-          <ReviewForm review={review[0]} setReview={setReview} 
+          <ReviewForm review={review} setReview={setReview} 
           setShowReviewForm={setShowReviewForm} reviewee={booking.user.username} /> :
           null
         }

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import UserContext from '../hooks/useUserContext';
 import Alert from "./Alert";
 import HostAPetApi from './Api';
@@ -6,30 +6,51 @@ import HostAPetApi from './Api';
 const ReviewForm = ({ review, reviewee, setReview, setShowReviewForm }) => {
   const { currentUser } = useContext(UserContext);
   const [formData, setFormData] = useState({
-    id: review.id || 0,
-    reviewer: review.reviewer || currentUser.username,
-    reviewee: review.reviewee || reviewee,
-    rating: review.rating || "",
-    comments: review.comments || ""
+    id: 0,
+    reviewer: currentUser.username,
+    reviewee: reviewee,
+    rating: "",
+    comments: ""
   });
   const [formErrors, setFormErrors] = useState([]);
   const [reviewSuccess, setReviewSuccess] = useState([]);
+
+  useEffect(function setForm() {
+    if (review) {
+      setFormData({
+        id: review.id,
+        reviewer: review.reviewer,
+        reviewee: review.reviewee,
+        rating: review.rating, 
+        comments: review.comments
+      })
+    }
+  }, []);
 
   /** Handle form submit */
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     let data = { ...formData };
     try {
+      let result;
       if (data.id === 0) {
         delete data.id;
-        const result = await HostAPetApi.addReview(currentUser.username, data);
-        setReview([result])
+        result = await HostAPetApi.addReview(currentUser.username, data);
+        setReview(result);
+
       } else {
         const id = data.id;
         delete data.id;
-        const result = await HostAPetApi.updateReview(currentUser.username, id, data);
-        setReview([result])
+        result = await HostAPetApi.updateReview(currentUser.username, id, data);
+        setReview(result)
       }
+      setFormData({
+        id: result.id,
+        reviewer: result.reviewer,
+        reviewee: result.reviewee,
+        rating: result.rating,
+        comments: result.comments
+      });
       setReviewSuccess(["Review successfully processed!"]);
       setFormErrors([]);
     } catch (err) {

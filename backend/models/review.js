@@ -107,17 +107,18 @@ class Review {
         rating, comments`,
       [reviewerId, revieweeId, rating, comments]
     );
+    const review = result.rows[0];
     try {
-      const reviewer = await User.getById(result.reviewerId);
-      result.reviewer = reviewer.username;
-      const reviewee = await User.getById(result.revieweeId);
-      result.reviewee = reviewee.username;
-      delete result.reviewerId;
-      delete result.revieweeId;
+      const reviewer = await User.getById(review.reviewerId);
+      review.reviewer = reviewer.username;
+      const reviewee = await User.getById(review.revieweeId);
+      review.reviewee = reviewee.username;
+      delete review.reviewerId;
+      delete review.revieweeId;
     } catch(err) {
       throw new BadRequestError(err)
     }  
-    return result.rows[0];
+    return review;
   }
 
 
