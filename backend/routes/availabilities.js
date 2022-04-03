@@ -43,7 +43,7 @@ router.post("/:username", ensureCorrectUserOrAdmin, async function (req, res, ne
 /** GET /[username] => [{ avail1 }, {avail2}, ... ]
  *
  * Returns list of { id, startDate, endDate, userId, roleId }
- * for range specified in request body.
+ * for specific user.
  *
  * Authorization required: own user or admin
  **/
