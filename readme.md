@@ -86,9 +86,9 @@ The website will offer a personalized experience for users who are looking for s
 ### Technologies used
 
 * React;
-* JavaScript
+* JavaScript;
 * Saas;
 * Node
 	* Express;
 
-#### Live App:
+#### Live App: https://host-a-pet.surge.sh/
