@@ -12,7 +12,7 @@ Pet owners would feel comfortable knowing their furry friends are being taken ca
 The website can potentially be visited by pet owners who are looking for pet sitters and by pet hosts - people who are considering adopting a pet and would like to have a glimpse of what pet ownership means (including involving kids in daily routines with the pets).
 
 ## Data / API
-This will be a full-stack application with its own database using PostgreSQL. Front-end will be built using React, and the back-end will be built using Node/Express. In order to calculate distance between pet owners and hosts, the application will use the [ZipCode API](https://www.zipcodeapi.com/). The API provides Canadian postal codes and US zip codes within a specified radius (in kilometers or miles) from a given postal/zip code. The free API key is restricted to 10 requests per hour, which should be enough for the purpose of this project.
+This will be a full-stack application with its own database using PostgreSQL. Front-end will be built using React, and the back-end will be built using Node/Express. In order to calculate distance between pet owners and hosts, the application will use the [ZipCode API](https://www.zipcodeapi.com/) (future enhancement). The API provides Canadian postal codes and US zip codes within a specified radius (in kilometers or miles) from a given postal/zip code. The free API key is restricted to 10 requests per hour, which should be enough for the purpose of this project.
 
 Here is an example of what a JSON response from the API looks like:
 
@@ -68,18 +68,17 @@ Users need to register in order to be able to use the app. Therefore, access to 
 The database will store user password that will be encrypted with `bcrypt` before it's stored in the database. User authentication will be done using JWT.
 
 ### Functionality
-The application will allow any registered/logged user to view available pets to host and available hosts for their pets. Search will be based primarily on three criteria: 
+The application will allow any registered/logged user to view available pets to host and available hosts for their pets. Search will be based primarily on two criteria: 
 
 * Host a pet or looking for someone to host their pet;
 * Date;
-* Distance (based on zip/postal code - optional);
 
-Once search results are available, users can apply filters or sort results by distance, and/or ratings, and then decide whether to book a hosting. 
+As a future enhancement, once search results are available, users can select a maximum distance to filter results, and then decide whether to book a hosting. 
 
 ### User Flow / UX
-From the home page, users will have the option to register or log in. Once logged in, users will be presented with a welcome back page showing most recent hostings for the user (either as a host or as a pet owner), and a form to make a search. The form will promtp whether the user is looking to host a pet or looking for someong to host their pet and the desired dates. Optionally, they can specify a city in order to limit search results. 
+From the home page, users will have the option to register or log in. Once logged in, users will be presented with the home page and the navigation bar at the top will show options available for the user (including admin panel if user has admin privileges). The form will prompt whether the user is looking to host a pet or looking for someong to host their pet and the desired dates. 
 
-Search results will be sorted in decreasing order of rating by default, and users will have the option to filter results by distance and/or ratings. The same criteria will be available for sorting the search results. If the user finds a match, they can proceed with the booking. Once a booking is created, both the host and the pet owner can write a review for that hosting event.  
+In a future enhancement, users will have the option to filter results by distance. If the user finds a match, they can proceed with the booking. Once a booking is created, both the host and the pet owner can write a review for that hosting event.  
 
 ### More than just CRUD
 The website will offer a personalized experience for users who are looking for someone to look after their pets and for someone willing to host a pet. For hosts, the experience of hosting can be even more valuable if they are considering adopting a pet: their kids can get involved and learn about the responsibility/accountability that comes with pet ownership. Users can be proud of the reputation they build within the app community as they get high ratings for their hosting events.
@@ -88,7 +87,6 @@ The website will offer a personalized experience for users who are looking for s
 
 * React;
 * JavaScript
-	* jQuery;
 * Saas;
 * Node
 	* Express;
