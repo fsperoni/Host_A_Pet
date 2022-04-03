@@ -1,5 +1,4 @@
 nav {
-  height: 4.5rem;
   color: var(--white);
   background-color: var(--black);
 
@@ -61,4 +60,16 @@ nav {
     font-weight: bold;
   }
   
+}
+
+@media (max-width: 635px) {
+  .nav {
+    font-size: small;
+
+  }
+  .login {
+    display: none;
+    position: absolute !important;
+    top: 10px !important;
+  }
 }

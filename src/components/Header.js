@@ -33,7 +33,7 @@ const Header = ({ logout }) => {
   }
 
   return (
-    <Navbar expand="sm" direction="horizontal">
+    <Navbar expand="lg" direction="horizontal">
       <NavLink end to="/" className="navbar-brand">
         <div className="d-flex">
           <img src={logoImg} alt="Host a Pet"/>
